@@ -17,7 +17,7 @@ To run the application:
 
    -Dkeystore.file=src/main/resources/private/keystore -Dkeystore.pass=changeit
 
-5. Note, this keystore is highly insecure! If you want more security, you 
+5. Note, this keystores is highly insecure! If you want more security, you 
    should obtain a real SSL certificate:
 
    http://tomcat.apache.org/tomcat-7.0-doc/ssl-howto.html
