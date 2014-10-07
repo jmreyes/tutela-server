@@ -5,7 +5,7 @@ UNDER NO CIRCUMSTANCES SHOULD YOU USE THIS APP "AS IS" IN PRODUCTION!!!
 
 ## Running the Application
 
-Please read the instructions carefully.
+Pllease read the instructions carefully.
 
 To run the application:
 
