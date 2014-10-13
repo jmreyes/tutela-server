@@ -30,6 +30,8 @@ repositories {
     mavenCentral()
     maven { url "http://repo.spring.io/libs-snapshot" }
     maven { url "http://maven.springframework.org/milestone" }
+    
+    
 }
 
 dependencies {
@@ -43,7 +45,12 @@ dependencies {
     compile("org.springframework.boot:spring-boot-starter-test:${springBootVersion}")
     compile("org.springframework.boot:spring-boot-starter-security:${springBootVersion}")
     compile("org.springframework.boot:spring-boot-starter-data-jpa:${springBootVersion}")
-    compile("org.springframework.data:spring-data-rest-webmvc")
+    compile("org.springframework.data:spring-data-rest-webmvc")    
+    
+    compile("org.springframework.security.oauth:spring-security-oauth2:2.0.0.RC2")
+    compile("org.springframework.security.oauth:spring-security-oauth2-javaconfig:1.0.0.M1")
+    
+    compile("org.springframework.boot:spring-boot-starter-data-mongodb")
     
     compile("org.hsqldb:hsqldb")
     

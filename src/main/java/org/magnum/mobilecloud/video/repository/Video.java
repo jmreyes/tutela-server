@@ -17,7 +17,6 @@ import com.google.common.base.Objects;
 public class Video {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
 
 	private String name;
