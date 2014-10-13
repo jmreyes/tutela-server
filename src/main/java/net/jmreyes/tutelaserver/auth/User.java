@@ -4,7 +4,7 @@
  **
  ** 
  */
-package org.magnum.mobilecloud.auth;
+package net.jmreyes.tutelaserver.auth;
 
 import java.util.Collection;
 import java.util.Collections;

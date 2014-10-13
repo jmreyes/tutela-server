@@ -1,4 +1,4 @@
-package org.magnum.mobilecloud.auth;
+package net.jmreyes.tutelaserver.auth;
 
 import java.io.File;
 import java.io.IOException;

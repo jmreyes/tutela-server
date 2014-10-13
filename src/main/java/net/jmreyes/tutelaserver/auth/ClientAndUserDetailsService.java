@@ -4,7 +4,7 @@
  **
  ** 
  */
-package org.magnum.mobilecloud.auth;
+package net.jmreyes.tutelaserver.auth;
 
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

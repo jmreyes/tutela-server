@@ -1,15 +1,15 @@
 package org.magnum.mobilecloud.integration.test;
 
 import static org.junit.Assert.*;
-import static org.junit.Assert.assertTrue;
 
 import java.util.Collection;
+
+import net.jmreyes.tutelaserver.api.VideoSvcApi;
+import net.jmreyes.tutelaserver.model.Video;
 
 import org.apache.http.HttpStatus;
 import org.junit.Test;
 import org.magnum.mobilecloud.video.TestData;
-import org.magnum.mobilecloud.video.client.VideoSvcApi;
-import org.magnum.mobilecloud.video.repository.Video;
 
 import retrofit.ErrorHandler;
 import retrofit.RestAdapter;

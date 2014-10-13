@@ -1,9 +1,8 @@
-package org.magnum.mobilecloud.video.client;
+package net.jmreyes.tutelaserver.api;
 
 import java.util.Collection;
 
-import org.magnum.mobilecloud.video.repository.Video;
-
+import net.jmreyes.tutelaserver.model.Video;
 import retrofit.http.Body;
 import retrofit.http.Field;
 import retrofit.http.FormUrlEncoded;

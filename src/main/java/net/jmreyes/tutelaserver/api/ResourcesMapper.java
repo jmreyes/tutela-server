@@ -1,4 +1,4 @@
-package org.magnum.mobilecloud.video.json;
+package net.jmreyes.tutelaserver.api;
 
 import java.io.IOException;
 

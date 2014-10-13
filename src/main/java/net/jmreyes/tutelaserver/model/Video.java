@@ -1,4 +1,4 @@
-package org.magnum.mobilecloud.video.repository;
+package net.jmreyes.tutelaserver.model;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

@@ -1,12 +1,13 @@
-package org.magnum.mobilecloud.video;
+package net.jmreyes.tutelaserver;
 
 import java.io.File;
 
+import net.jmreyes.tutelaserver.api.ResourcesMapper;
+import net.jmreyes.tutelaserver.auth.OAuth2SecurityConfiguration;
+import net.jmreyes.tutelaserver.model.Video;
+
 import org.apache.catalina.connector.Connector;
 import org.apache.coyote.http11.Http11NioProtocol;
-import org.magnum.mobilecloud.auth.OAuth2SecurityConfiguration;
-import org.magnum.mobilecloud.video.json.ResourcesMapper;
-import org.magnum.mobilecloud.video.repository.Video;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
