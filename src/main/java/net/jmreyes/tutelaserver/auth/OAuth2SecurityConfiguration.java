@@ -8,6 +8,8 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import net.jmreyes.tutelaserver.repository.CustomUserDetailsService;
+
 import org.apache.catalina.connector.Connector;
 import org.apache.coyote.http11.Http11NioProtocol;
 import org.apache.http.HttpStatus;
@@ -169,17 +171,19 @@ public class OAuth2SecurityConfiguration {
 					.authorities("ROLE_CLIENT")
 					.scopes("read").resourceIds("video")
 					.accessTokenValiditySeconds(3600).and().build();
+			
+			UserDetailsService svc = new CustomUserDetailsService();
 
-			// Create a series of hard-coded users. 
-			UserDetailsService svc = new InMemoryUserDetailsManager(
-					Arrays.asList(
-							User.create("admin", "pass", "ADMIN", "USER"),
-							User.create("user0", "pass", "USER"),
-							User.create("user1", "pass", "USER"),
-							User.create("user2", "pass", "USER"),
-							User.create("user3", "pass", "USER"),
-							User.create("user4", "pass", "USER"),
-							User.create("user5", "pass", "USER")));
+//			// Create a series of hard-coded users. 
+//			UserDetailsService svc = new InMemoryUserDetailsManager(
+//					Arrays.asList(
+//							User.create("admin", "pass", "ADMIN", "USER"),
+//							User.create("user0", "pass", "USER"),
+//							User.create("user1", "pass", "USER"),
+//							User.create("user2", "pass", "USER"),
+//							User.create("user3", "pass", "USER"),
+//							User.create("user4", "pass", "USER"),
+//							User.create("user5", "pass", "USER")));
 
 			// Since clients have to use BASIC authentication with the client's id/secret,
 			// when sending a request for a password grant, we make each client a user

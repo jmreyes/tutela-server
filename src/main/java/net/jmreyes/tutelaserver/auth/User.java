@@ -9,18 +9,31 @@ package net.jmreyes.tutelaserver.auth;
 import java.util.Collection;
 import java.util.Collections;
 
+import javax.persistence.ElementCollection;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.userdetails.UserDetails;
 
+@Entity
 public class User implements UserDetails {
+	
+	@Id
+	private long id;
+	
+	private String name;
 
 	public static UserDetails create(String username, String password,
 			String...authorities) {
 		return new User(username, password, authorities);
 	}
 	
+
+    @ElementCollection(targetClass=GrantedAuthority.class)
 	private final Collection<GrantedAuthority> authorities_;
+	
 	private final String password_;
 	private final String username_;
 
