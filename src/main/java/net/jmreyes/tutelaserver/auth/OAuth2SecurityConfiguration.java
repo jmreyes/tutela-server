@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import net.jmreyes.tutelaserver.repository.CustomUserDetailsService;
+import net.jmreyes.tutelaserver.repository.UserRepository;
 
 import org.apache.catalina.connector.Connector;
 import org.apache.coyote.http11.Http11NioProtocol;
@@ -158,22 +159,22 @@ public class OAuth2SecurityConfiguration {
 			
 			
 			// Create a service that has the credentials for all our clients
-			ClientDetailsService csvc = new InMemoryClientDetailsServiceBuilder()
-					// Create a client that has "read" and "write" access to the
-			        // video service
-					.withClient("mobile").authorizedGrantTypes("password")
-					.authorities("ROLE_CLIENT", "ROLE_TRUSTED_CLIENT")
-					.scopes("read","write").resourceIds("video")
-					.and()
-					// Create a second client that only has "read" access to the
-					// video service
-					.withClient("mobileReader").authorizedGrantTypes("password")
-					.authorities("ROLE_CLIENT")
-					.scopes("read").resourceIds("video")
-					.accessTokenValiditySeconds(3600).and().build();
+//			ClientDetailsService csvc = new InMemoryClientDetailsServiceBuilder()
+//					// Create a client that has "read" and "write" access to the
+//			        // video service
+//					.withClient("mobile").authorizedGrantTypes("password")
+//					.authorities("ROLE_CLIENT", "ROLE_TRUSTED_CLIENT")
+//					.scopes("read","write").resourceIds("video")
+//					.and()
+//					// Create a second client that only has "read" access to the
+//					// video service
+//					.withClient("mobileReader").authorizedGrantTypes("password")
+//					.authorities("ROLE_CLIENT")
+//					.scopes("read").resourceIds("video")
+//					.accessTokenValiditySeconds(3600).and().build();
 			
-			UserDetailsService svc = new CustomUserDetailsService();
-
+			//UserDetailsService svc = new CustomUserDetailsService();
+						
 //			// Create a series of hard-coded users. 
 //			UserDetailsService svc = new InMemoryUserDetailsManager(
 //					Arrays.asList(
@@ -190,7 +191,7 @@ public class OAuth2SecurityConfiguration {
 			// as well. When the BASIC authentication information is pulled from the
 			// request, this combined UserDetailsService will authenticate that the
 			// client is a valid "user". 
-			combinedService_ = new ClientAndUserDetailsService(csvc, svc);
+			combinedService_ = new ClientAndUserDetailsService();
 		}
 
 		/**

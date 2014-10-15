@@ -6,9 +6,13 @@
  */
 package net.jmreyes.tutelaserver.auth;
 
+import net.jmreyes.tutelaserver.repository.CustomUserDetailsService;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.oauth2.config.annotation.builders.InMemoryClientDetailsServiceBuilder;
 import org.springframework.security.oauth2.provider.ClientDetails;
 import org.springframework.security.oauth2.provider.ClientDetailsService;
 import org.springframework.security.oauth2.provider.ClientRegistrationException;
@@ -26,15 +30,29 @@ public class ClientAndUserDetailsService implements UserDetailsService,
 
 	private final ClientDetailsService clients_;
 
-	private final UserDetailsService users_;
+	@Autowired
+	private CustomUserDetailsService users_;
 	
 	private final ClientDetailsUserDetailsService clientDetailsWrapper_;
 
-	public ClientAndUserDetailsService(ClientDetailsService clients,
-			UserDetailsService users) {
+	public ClientAndUserDetailsService() throws Exception {
 		super();
-		clients_ = clients;
-		users_ = users;
+
+		clients_ = new InMemoryClientDetailsServiceBuilder()
+				// Create a client that has "read" and "write" access to the
+				// video service
+				.withClient("mobile")
+				.authorizedGrantTypes("password")
+				.authorities("ROLE_CLIENT", "ROLE_TRUSTED_CLIENT")
+				.scopes("read", "write")
+				.resourceIds("video")
+				.and()
+				// Create a second client that only has "read" access to the
+				// video service
+				.withClient("mobileReader").authorizedGrantTypes("password")
+				.authorities("ROLE_CLIENT").scopes("read").resourceIds("video")
+				.accessTokenValiditySeconds(3600).and().build();
+
 		clientDetailsWrapper_ = new ClientDetailsUserDetailsService(clients_);
 	}
 
@@ -49,6 +67,7 @@ public class ClientAndUserDetailsService implements UserDetailsService,
 			throws UsernameNotFoundException {
 		UserDetails user = null;
 		try{
+			System.out.println("Looking for user "+username);
 			user = users_.loadUserByUsername(username);
 		}catch(UsernameNotFoundException e){
 			user = clientDetailsWrapper_.loadUserByUsername(username);

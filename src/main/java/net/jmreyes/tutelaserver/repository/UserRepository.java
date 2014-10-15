@@ -3,7 +3,7 @@ package net.jmreyes.tutelaserver.repository;
 import java.util.Collection;
 
 import net.jmreyes.tutelaserver.api.VideoSvcApi;
-import net.jmreyes.tutelaserver.auth.User;
+import net.jmreyes.tutelaserver.model.User;
 import net.jmreyes.tutelaserver.model.Video;
 
 import org.springframework.data.mongodb.repository.MongoRepository;
@@ -32,14 +32,14 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 //    (e.g., /video/search/findByName?title=Foo)
 //
 @RepositoryRestResource(path = "/user")
-public interface UserRepository extends MongoRepository<User, Long> {
+public interface UserRepository extends MongoRepository<User, String> {
 
 	// Find all videos with a matching title (e.g., Video.name)
-	public Collection<User> findByName(
+	public User findByUsername(
 			// The @Param annotation tells Spring Data Rest which HTTP request
 			// parameter it should use to fill in the "title" variable used to
 			// search for Videos
-			@Param(VideoSvcApi.TITLE_PARAMETER) String title);
+			@Param(VideoSvcApi.TITLE_PARAMETER) String username);
 	
 	
 	/*

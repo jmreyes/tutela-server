@@ -1,9 +1,8 @@
 package net.jmreyes.tutelaserver.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 import com.google.common.base.Objects;
 
@@ -13,11 +12,11 @@ import com.google.common.base.Objects;
  * @author jules
  * 
  */
-@Entity
+@Document
 public class Video {
 
 	@Id
-	private long id;
+	private String id;
 
 	private String name;
 	private String url;
@@ -57,11 +56,11 @@ public class Video {
 		this.duration = duration;
 	}
 
-	public long getId() {
+	public String getId() {
 		return id;
 	}
 
-	public void setId(long id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 

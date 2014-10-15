@@ -4,38 +4,38 @@
  **
  ** 
  */
-package net.jmreyes.tutelaserver.auth;
+package net.jmreyes.tutelaserver.model;
 
 import java.util.Collection;
 import java.util.Collections;
 
 import javax.persistence.ElementCollection;
-import javax.persistence.Entity;
-import javax.persistence.Id;
 
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.userdetails.UserDetails;
 
-@Entity
+@Document
 public class User implements UserDetails {
 	
 	@Id
-	private long id;
+	private String id;
 	
-	private String name;
-
-	public static UserDetails create(String username, String password,
-			String...authorities) {
-		return new User(username, password, authorities);
+	public User() {
 	}
 	
+	public static User create(String username, String password,
+			String...authorities) {
+		return new User(username, password, authorities);
+	}	
 
     @ElementCollection(targetClass=GrantedAuthority.class)
-	private final Collection<GrantedAuthority> authorities_;
+	private Collection<GrantedAuthority> authorities_;
 	
-	private final String password_;
-	private final String username_;
+	private String password;
+	private String username;
 
 	@SuppressWarnings("unchecked")
 	private User(String username, String password) {
@@ -44,16 +44,16 @@ public class User implements UserDetails {
 
 	private User(String username, String password,
 			String...authorities) {
-		username_ = username;
-		password_ = password;
+		this.username = username;
+		this.password = password;
 		authorities_ = AuthorityUtils.createAuthorityList(authorities);
 	}
 
 	private User(String username, String password,
 			Collection<GrantedAuthority> authorities) {
 		super();
-		username_ = username;
-		password_ = password;
+		this.username = username;
+		this.password = password;
 		authorities_ = authorities;
 	}
 
@@ -62,11 +62,11 @@ public class User implements UserDetails {
 	}
 
 	public String getPassword() {
-		return password_;
+		return password;
 	}
 
 	public String getUsername() {
-		return username_;
+		return username;
 	}
 
 	@Override

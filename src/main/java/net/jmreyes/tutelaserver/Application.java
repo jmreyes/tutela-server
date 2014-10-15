@@ -1,21 +1,9 @@
 package net.jmreyes.tutelaserver;
 
-import java.io.File;
-
 import net.jmreyes.tutelaserver.api.ResourcesMapper;
 import net.jmreyes.tutelaserver.auth.OAuth2SecurityConfiguration;
-import net.jmreyes.tutelaserver.model.Video;
-
-import org.apache.catalina.connector.Connector;
-import org.apache.coyote.http11.Http11NioProtocol;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
-import org.springframework.boot.context.embedded.ConfigurableEmbeddedServletContainer;
-import org.springframework.boot.context.embedded.EmbeddedServletContainerCustomizer;
-import org.springframework.boot.context.embedded.tomcat.TomcatConnectorCustomizer;
-import org.springframework.boot.context.embedded.tomcat.TomcatEmbeddedServletContainerFactory;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
@@ -67,6 +55,7 @@ public class Application extends RepositoryRestMvcConfiguration {
 	// Tell Spring to launch our app!
 	public static void main(String[] args) {
 		SpringApplication.run(Application.class, args);
+		
 	}
 	
 	// We are overriding the bean that RepositoryRestMvcConfiguration 

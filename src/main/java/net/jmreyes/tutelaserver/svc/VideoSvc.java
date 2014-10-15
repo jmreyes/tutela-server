@@ -75,7 +75,7 @@ public class VideoSvc {
 	}
 	
 	@RequestMapping(value = VideoSvcApi.VIDEO_SVC_PATH + "/{id}", method = RequestMethod.GET)
-	public @ResponseBody Video findById(@PathVariable("id") long id) {		
+	public @ResponseBody Video findById(@PathVariable("id") String id) {		
 		return videos.findOne(id);
 	}
 	

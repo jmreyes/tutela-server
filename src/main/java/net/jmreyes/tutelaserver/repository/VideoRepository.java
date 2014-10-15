@@ -28,7 +28,7 @@ import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 //    (e.g., /video/search/findByName?title=Foo)
 //
 @RepositoryRestResource(path = VideoSvcApi.VIDEO_SVC_PATH)
-public interface VideoRepository extends MongoRepository<Video, Long>{
+public interface VideoRepository extends MongoRepository<Video, String>{
 
 	// Find all videos with a matching title (e.g., Video.name)
 	public Collection<Video> findByName(
@@ -43,6 +43,7 @@ public interface VideoRepository extends MongoRepository<Video, Long>{
 			// parameter it should use to fill in the "duration" variable used to
 			// search for Videos
 			@Param(VideoSvcApi.DURATION_PARAMETER) long maxduration);
+	
 	
 	/*
 	 * See: http://docs.spring.io/spring-data/jpa/docs/1.3.0.RELEASE/reference/html/jpa.repositories.html 
