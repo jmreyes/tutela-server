@@ -19,6 +19,11 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 @Document
 public class User implements UserDetails {
+	public static final String SCOPE_READ = "read";
+	public static final String SCOPE_WRITE = "write";
+	
+	public static final String ROLE_PATIENT = "ROLE_PATIENT";
+	public static final String ROLE_DOCTOR = "ROLE_DOCTOR";
 	
 	@Id
 	private String id;
