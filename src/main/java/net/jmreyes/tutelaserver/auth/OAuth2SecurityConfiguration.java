@@ -275,15 +275,18 @@ public class OAuth2SecurityConfiguration {
 					@Override
 					public void customize(Connector connector) {
 						connector.setPort(8443);
-						connector.setSecure(true);
-						connector.setScheme("https");
+						
+						// TODO: enable HTTPS/SSL for production
+						
+//						connector.setSecure(true);
+//						connector.setScheme("https");
 
 						Http11NioProtocol proto = (Http11NioProtocol) connector
 								.getProtocolHandler();
-						proto.setSSLEnabled(true);
-						proto.setKeystoreFile(absoluteKeystoreFile);
-						proto.setKeystorePass(keystorePass);
-						proto.setKeystoreType("JKS");
+//						proto.setSSLEnabled(true);
+//						proto.setKeystoreFile(absoluteKeystoreFile);
+//						proto.setKeystorePass(keystorePass);
+//						proto.setKeystoreType("JKS");
 						proto.setKeyAlias("tomcat");
 					}
 				});
