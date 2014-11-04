@@ -21,7 +21,13 @@ public class Medication {
 
 	private String name;
 	
-	private String dummyField;
+	private String dummyField;	
+
+	private String doctorName;
+	
+	private String frequency;
+	
+	private String notes;
 	
 	public Medication() {
 	}
@@ -55,6 +61,30 @@ public class Medication {
 	
 	public void setDummyField(String dummyField) {
 		this.dummyField = dummyField;
+	}
+	
+	public String getDoctorName() {
+		return doctorName;
+	}
+
+	public void getDoctorName(String doctorName) {
+		this.doctorName = doctorName;
+	}
+	
+	public String getFrequency() {
+		return frequency;
+	}
+
+	public void getFrequency(String frequency) {
+		this.frequency = frequency;
+	}
+	
+	public String getNotes() {
+		return notes;
+	}
+
+	public void getNotes(String notes) {
+		this.notes = notes;
 	}
 
 
