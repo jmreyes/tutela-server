@@ -18,7 +18,7 @@ import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.userdetails.UserDetails;
 
 @Document
-public class User implements UserDetails {
+public class Patient implements UserDetails {
 	public static final String SCOPE_READ = "read";
 	public static final String SCOPE_WRITE = "write";
 	
@@ -27,43 +27,43 @@ public class User implements UserDetails {
 	
 	@Id
 	private String id;
-	
-	public User() {
+		
+	public Patient() {
 	}
 	
-	public static User create(String username, String password,
+	public static Patient create(String username, String password,
 			String...authorities) {
-		return new User(username, password, authorities);
+		return new Patient(username, password, authorities);
 	}	
 
     @ElementCollection(targetClass=GrantedAuthority.class)
-	private Collection<GrantedAuthority> authorities_;
+	private Collection<GrantedAuthority> authorities;
 	
 	private String password;
 	private String username;
 
 	@SuppressWarnings("unchecked")
-	private User(String username, String password) {
+	private Patient(String username, String password) {
 		this(username, password, Collections.EMPTY_LIST);
 	}
 
-	private User(String username, String password,
+	public Patient(String username, String password,
 			String...authorities) {
 		this.username = username;
 		this.password = password;
-		authorities_ = AuthorityUtils.createAuthorityList(authorities);
+		this.authorities = AuthorityUtils.createAuthorityList(authorities);
 	}
 
-	private User(String username, String password,
+	private Patient(String username, String password,
 			Collection<GrantedAuthority> authorities) {
 		super();
 		this.username = username;
 		this.password = password;
-		authorities_ = authorities;
+		this.authorities = authorities;
 	}
 
 	public Collection<GrantedAuthority> getAuthorities() {
-		return authorities_;
+		return authorities;
 	}
 
 	public String getPassword() {

@@ -1,6 +1,7 @@
 package net.jmreyes.tutelaserver.repository;
 
-import net.jmreyes.tutelaserver.model.User;
+import net.jmreyes.tutelaserver.model.Doctor;
+import net.jmreyes.tutelaserver.model.Patient;
 import net.jmreyes.tutelaserver.model.Video;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,13 +18,20 @@ public class CustomUserDetailsService implements UserDetailsService {
 	@Autowired
 	private UserRepository users;
 	
+	@Autowired
+	private DoctorRepository doctors;
+	
 
 	@Override
 	public UserDetails loadUserByUsername(String username)
 			throws UsernameNotFoundException {
 		System.out.println("Looking for user "+username+" in CustomUserDetailsService");
 		
-		User u = users.findByUsername(username);		
+		Patient u = users.findByUsername(username);		
+		if (u != null) return u;
+		
+		Doctor d = doctors.findByUsername(username);		
+		if (d != null) return d;
 		
 		return u;		
 	}

@@ -18,10 +18,17 @@
 
 package net.jmreyes.tutelaserver.svc;
 
-import net.jmreyes.tutelaserver.model.User;
+import java.util.Collection;
+import java.util.List;
+
+import net.jmreyes.tutelaserver.model.Doctor;
+import net.jmreyes.tutelaserver.model.Patient;
+import net.jmreyes.tutelaserver.repository.DoctorRepository;
 import net.jmreyes.tutelaserver.repository.UserRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -35,8 +42,33 @@ public class UserSvc {
 	@Autowired
 	private UserRepository users;
 	
+	@Autowired
+	private DoctorRepository doctors;
+	
 	@RequestMapping(value = "/users" + "/{username}", method = RequestMethod.GET)
-	public @ResponseBody User findById(@PathVariable("username") String username) {		
+	public @ResponseBody Patient findById(@PathVariable("username") String username) {
 		return users.findByUsername(username);
+	}
+	
+	@RequestMapping(value = "/user/me/role", method = RequestMethod.GET)
+	public @ResponseBody String getMyRole() {
+		String role = null;
+		Collection<GrantedAuthority> authorities = null;
+		
+		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		
+		if (principal instanceof Patient) {
+			Patient activeUser = (Patient) principal;
+			authorities = activeUser.getAuthorities();        
+		} else if (principal instanceof Doctor) {
+			Doctor activeUser = (Doctor) principal;
+			authorities = activeUser.getAuthorities();        
+		}
+		
+        for (GrantedAuthority auth : authorities) {
+        	role = auth.getAuthority();
+        }
+        
+        return role;        
 	}
 }
