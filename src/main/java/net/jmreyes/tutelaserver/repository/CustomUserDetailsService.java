@@ -16,7 +16,7 @@ public class CustomUserDetailsService implements UserDetailsService {
 	private VideoRepository videos;	
 	
 	@Autowired
-	private UserRepository users;
+	private PatientRepository patients;
 	
 	@Autowired
 	private DoctorRepository doctors;
@@ -27,7 +27,7 @@ public class CustomUserDetailsService implements UserDetailsService {
 			throws UsernameNotFoundException {
 		System.out.println("Looking for user "+username+" in CustomUserDetailsService");
 		
-		Patient u = users.findByUsername(username);		
+		Patient u = patients.findByUsername(username);		
 		if (u != null) return u;
 		
 		Doctor d = doctors.findByUsername(username);		

@@ -2,6 +2,7 @@ package net.jmreyes.tutelaserver.api;
 
 import java.util.Collection;
 
+import net.jmreyes.tutelaserver.model.Patient;
 import net.jmreyes.tutelaserver.model.Video;
 import retrofit.http.Body;
 import retrofit.http.Field;
@@ -20,11 +21,13 @@ import retrofit.http.Query;
  * @author jules
  *
  */
-public interface MedicationSvcApi {
+public interface PatientSvcApi {
+	public static final String PATIENT_SVC_PATH = "/patient";	
+
+	public static final String PATIENT_TREATMENTS = PATIENT_SVC_PATH + "/me/treatments";
+	public static final String PATIENT_DOCTORS = PATIENT_SVC_PATH + "/me/doctors";
+	public static final String PATIENT_CHECKIN = PATIENT_SVC_PATH + "/me/checkin";
 	
-	public static final String NAME_PARAMETER = "name";
-	
-	// The path where we expect the MedicationSvc to live
-	public static final String MEDICATION_SVC_PATH = "/medication";
-	
+	@GET(PATIENT_TREATMENTS)
+	public Collection<Patient> getTreatments();
 }

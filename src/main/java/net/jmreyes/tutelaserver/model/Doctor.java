@@ -26,19 +26,14 @@ public class Doctor implements UserDetails {
 	public static final String ROLE_DOCTOR = "ROLE_DOCTOR";
 	
 	@Id
-	private String id;
-	
-	public Doctor() {
-	}
-	
-	public static Doctor create(String username, String password,
-			String...authorities) {
-		return new Doctor(username, password, authorities);
-	}
-	
+	private String id;	
+
+	private String password;
+	private String username;
 
 	private String firstName;
 	private String lastName;
+	
 	private String phoneNumber;
 	private String email;
 	
@@ -60,14 +55,20 @@ public class Doctor implements UserDetails {
 	
 	public String getEmail() {
 		return email;
-	}
-	
+	}	
 
     @ElementCollection(targetClass=GrantedAuthority.class)
 	private Collection<GrantedAuthority> authorities;
+    
+
+	public Doctor() {
+	}
 	
-	private String password;
-	private String username;
+	public static Doctor create(String username, String password,
+			String...authorities) {
+		return new Doctor(username, password, authorities);
+	}	
+	
 
 	@SuppressWarnings("unchecked")
 	private Doctor(String username, String password) {

@@ -27,20 +27,18 @@ public class Patient implements UserDetails {
 	
 	@Id
 	private String id;
-		
-	public Patient() {
-	}
+
+	private String password;
+	private String username;	
+
+    @ElementCollection(targetClass=GrantedAuthority.class)
+	private Collection<GrantedAuthority> authorities;
+	
 	
 	public static Patient create(String username, String password,
 			String...authorities) {
 		return new Patient(username, password, authorities);
 	}	
-
-    @ElementCollection(targetClass=GrantedAuthority.class)
-	private Collection<GrantedAuthority> authorities;
-	
-	private String password;
-	private String username;
 
 	@SuppressWarnings("unchecked")
 	private Patient(String username, String password) {
@@ -60,11 +58,23 @@ public class Patient implements UserDetails {
 		this.username = username;
 		this.password = password;
 		this.authorities = authorities;
+	}	
+
+    public Patient() {
 	}
 
 	public Collection<GrantedAuthority> getAuthorities() {
 		return authorities;
 	}
+	
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
 
 	public String getPassword() {
 		return password;

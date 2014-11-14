@@ -1,19 +1,10 @@
 package net.jmreyes.tutelaserver.auth;
 
-import java.io.File;
-import java.io.IOException;
-import java.util.Arrays;
-
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
-import net.jmreyes.tutelaserver.repository.CustomUserDetailsService;
-import net.jmreyes.tutelaserver.repository.UserRepository;
+import net.jmreyes.tutelaserver.api.DoctorSvcApi;
+import net.jmreyes.tutelaserver.api.PatientSvcApi;
 
 import org.apache.catalina.connector.Connector;
 import org.apache.coyote.http11.Http11NioProtocol;
-import org.apache.http.HttpStatus;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.embedded.ConfigurableEmbeddedServletContainer;
@@ -30,9 +21,7 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.oauth2.config.annotation.builders.InMemoryClientDetailsServiceBuilder;
 import org.springframework.security.oauth2.config.annotation.configurers.ClientDetailsServiceConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.AuthorizationServerConfigurerAdapter;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableAuthorizationServer;
@@ -40,8 +29,6 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.E
 import org.springframework.security.oauth2.config.annotation.web.configuration.ResourceServerConfigurerAdapter;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerEndpointsConfigurer;
 import org.springframework.security.oauth2.provider.ClientDetailsService;
-import org.springframework.security.provisioning.InMemoryUserDetailsManager;
-import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;
 
 /**
  *	Configure this web application to use OAuth 2.0.
@@ -107,19 +94,20 @@ public class OAuth2SecurityConfiguration {
 			// application, this is one of the key sections that you
 			// would want to change
 			
-			// Require all GET requests to have client "read" scope
-			http
-			.authorizeRequests()
-				.antMatchers(HttpMethod.GET, "/**")
-				.access("#oauth2.hasScope('read')");
-			
-			// Require all other requests to have "write" scope
-			http
-			.authorizeRequests()
-				.antMatchers("/**")
-				.access("#oauth2.hasScope('write')");
-		}
 
+			http.authorizeRequests().antMatchers(DoctorSvcApi.DOCTOR_SVC_PATH + "/me/**").hasRole("DOCTOR");
+			
+			http.authorizeRequests().antMatchers(PatientSvcApi.PATIENT_SVC_PATH + "/me/**").hasRole("PATIENT");
+			
+			// Require all GET requests to have client "read" scope
+			http.authorizeRequests().antMatchers(HttpMethod.GET, "/**")
+					.access("#oauth2.hasScope('read')");
+
+			// Require all other requests to have "write" scope
+			http.authorizeRequests().antMatchers("/**")
+					.access("#oauth2.hasScope('write')");
+
+		}
 	}
 	
 	/**
@@ -263,8 +251,8 @@ public class OAuth2SecurityConfiguration {
 		// application, this is one of the key sections that you
 		// would want to change
 
-		final String absoluteKeystoreFile = new File(keystoreFile)
-				.getAbsolutePath();
+//		final String absoluteKeystoreFile = new File(keystoreFile)
+//				.getAbsolutePath();
 
 		return new EmbeddedServletContainerCustomizer() {
 

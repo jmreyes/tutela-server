@@ -2,6 +2,7 @@ package net.jmreyes.tutelaserver.repository;
 
 import java.util.Collection;
 
+import net.jmreyes.tutelaserver.api.PatientSvcApi;
 import net.jmreyes.tutelaserver.api.VideoSvcApi;
 import net.jmreyes.tutelaserver.model.Doctor;
 import net.jmreyes.tutelaserver.model.Patient;
@@ -32,7 +33,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 // 4. Send search requests to our findByXYZ methods to /video/search/findByXYZ
 //    (e.g., /video/search/findByName?title=Foo)
 //
-@RepositoryRestResource(path = "/patient")
+@RepositoryRestResource(path = PatientSvcApi.PATIENT_SVC_PATH)
 public interface PatientRepository extends MongoRepository<Patient, String> {
 
 	// Find all videos with a matching title (e.g., Video.name)

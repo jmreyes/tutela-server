@@ -20,38 +20,38 @@ package net.jmreyes.tutelaserver.svc;
 
 import java.util.Collection;
 
-import net.jmreyes.tutelaserver.model.Doctor;
+import net.jmreyes.tutelaserver.api.PatientSvcApi;
 import net.jmreyes.tutelaserver.model.Patient;
+import net.jmreyes.tutelaserver.model.Treatment;
+import net.jmreyes.tutelaserver.repository.PatientRepository;
+import net.jmreyes.tutelaserver.repository.TreatmentRepository;
 
-import org.springframework.security.core.GrantedAuthority;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.google.common.collect.Lists;
+
 @Controller
-public class UserSvc {	
+public class PatientSvc {	
+
+	@Autowired
+	private PatientRepository patientRepo;
 	
-	@RequestMapping(value = "/user/me/role", method = RequestMethod.GET)
-	public @ResponseBody String getMyRole() {
-		String role = null;
-		Collection<GrantedAuthority> authorities = null;
+	@Autowired
+	private TreatmentRepository treatmentRepo;	
+	
+	@RequestMapping(value = PatientSvcApi.PATIENT_TREATMENTS, method = RequestMethod.GET)
+	public @ResponseBody Collection<Treatment> getTreatmentList() {
+		System.out.println("HOLA");
 		
-		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		Patient patient = (Patient) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+		System.out.println(patient.getId());
 		
-		if (principal instanceof Patient) {
-			Patient activeUser = (Patient) principal;
-			authorities = activeUser.getAuthorities();        
-		} else if (principal instanceof Doctor) {
-			Doctor activeUser = (Doctor) principal;
-			authorities = activeUser.getAuthorities();        
-		}
-		
-        for (GrantedAuthority auth : authorities) {
-        	role = auth.getAuthority();
-        }
-        
-        return role;        
-	}
+		return Lists.newArrayList(treatmentRepo.findByPatientId(patient.getId()));
+	}	
 }
