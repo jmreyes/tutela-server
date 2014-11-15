@@ -79,6 +79,9 @@ public class Treatment {
 		private String medicationName;
 		private String notes;
 		
+		public EmbeddedMedication() {			
+		}
+		
 		public String getMedicationId() {
 			return medicationId;
 		}
@@ -102,6 +105,9 @@ public class Treatment {
 	public class EmbeddedSymptom {
 		private String symptomId;
 		private String sypmtomName;
+		
+		public EmbeddedSymptom() {
+		}
 		
 		public String getSymptomId() {
 			return symptomId;

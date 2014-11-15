@@ -1,9 +1,13 @@
 package net.jmreyes.tutelaserver.model;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.format.annotation.DateTimeFormat.ISO;
 
 /**
  * A simple object to represent a video and its URL for viewing.
@@ -18,17 +22,17 @@ public class CheckIn {
 	private String id;
 	
 	private String treatmentId;
-	private String patientId;
+	private String patientId;	
+
 	private Date date;
 
-	private EmbeddedMedication medication[];
-	private EmbeddedSymptom symptoms[];
+	private Collection<EmbeddedMedication> medication;
+	private Collection<EmbeddedSymptom> symptoms;
 
-	public CheckIn(String id, String treatmentId, String patientId, Date date,
-			EmbeddedMedication[] medication,
-			EmbeddedSymptom[] symptoms) {
+	public CheckIn(String treatmentId, String patientId, Date date,
+			Collection<EmbeddedMedication> medication,
+			Collection<EmbeddedSymptom> symptoms) {
 		super();
-		this.id = id;
 		this.treatmentId = treatmentId;
 		this.patientId = patientId;
 		this.date = date;
@@ -71,26 +75,37 @@ public class CheckIn {
 		this.date = date;
 	}
 
-	public EmbeddedMedication[] getMedication() {
+	public Collection<EmbeddedMedication> getMedication() {
 		return medication;
 	}
 
-	public void setMedication(EmbeddedMedication[] medication) {
+	public void setMedication(Collection<EmbeddedMedication> medication) {
 		this.medication = medication;
 	}
 
-	public EmbeddedSymptom[] getSymptoms() {
+	public Collection<EmbeddedSymptom> getSymptoms() {
 		return symptoms;
 	}
 
-	public void setSymptoms(EmbeddedSymptom[] symptoms) {
+	public void setSymptoms(Collection<EmbeddedSymptom> symptoms) {
 		this.symptoms = symptoms;
 	}
-	
-	public class EmbeddedMedication {
+		
+	public static class EmbeddedMedication {
 		private String medicationId;
 		private String medicationName;
 		private boolean taken;
+		
+		public EmbeddedMedication() {			
+		}
+		
+		public EmbeddedMedication(String medicationId, String medicationName,
+				boolean taken) {
+			super();
+			this.medicationId = medicationId;
+			this.medicationName = medicationName;
+			this.taken = taken;
+		}
 		
 		public String getMedicationId() {
 			return medicationId;
@@ -112,11 +127,23 @@ public class CheckIn {
 		}
 	}
 	
-	public class EmbeddedSymptom {
+	public static class EmbeddedSymptom {
 		private String symptomId;
 		private String sypmtomName;
 		private String ansText;
 		private int ansIndex;
+		
+		public EmbeddedSymptom() {			
+		}
+		
+		public EmbeddedSymptom(String symptomId, String sypmtomName,
+				String ansText, int ansIndex) {
+			super();
+			this.symptomId = symptomId;
+			this.sypmtomName = sypmtomName;
+			this.ansText = ansText;
+			this.ansIndex = ansIndex;
+		}
 		
 		public String getSymptomId() {
 			return symptomId;

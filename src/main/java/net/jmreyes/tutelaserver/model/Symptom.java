@@ -1,5 +1,9 @@
 package net.jmreyes.tutelaserver.model;
 
+import java.util.Collection;
+
+import net.jmreyes.tutelaserver.model.extra.Answer;
+
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -18,12 +22,12 @@ public class Symptom {
 	private String doctorId;
 	private String name;	
 	private String question;	
-	private EmbeddedAnswers answers[];	
-	private EmbeddedAlerts alerts[];
+	private Collection<Answer> answers;	
+	private Collection<EmbeddedAlerts> alerts;
 
 	public Symptom(String id, String doctorId, String name, String question,
-			EmbeddedAnswers[] answers,
-			EmbeddedAlerts[] alerts) {
+			Collection<Answer> answers,
+			Collection<EmbeddedAlerts> alerts) {
 		super();
 		this.id = id;
 		this.doctorId = doctorId;
@@ -69,29 +73,27 @@ public class Symptom {
 		this.question = question;
 	}
 
-	public EmbeddedAnswers[] getAnswers() {
+	public Collection<Answer> getAnswers() {
 		return answers;
 	}
 
-	public void setAnswers(EmbeddedAnswers[] answers) {
+	public void setAnswers(Collection<Answer> answers) {
 		this.answers = answers;
 	}
 
-	public EmbeddedAlerts[] getAlerts() {
+	public Collection<EmbeddedAlerts> getAlerts() {
 		return alerts;
 	}
 
-	public void setAlerts(EmbeddedAlerts[] alerts) {
+	public void setAlerts(Collection<EmbeddedAlerts> alerts) {
 		this.alerts = alerts;
-	}
-
-	public class EmbeddedAnswers {
-		private String ansText;
-		private int ansIndex;
 	}
 	
 	public class EmbeddedAlerts {
 		private String hours;
 		private int ansIndex;
+		
+		public EmbeddedAlerts(){			
+		}
 	}
 }

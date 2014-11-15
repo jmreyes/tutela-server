@@ -17,6 +17,8 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Document
 public class Patient implements UserDetails {
 	public static final String SCOPE_READ = "read";
@@ -28,9 +30,13 @@ public class Patient implements UserDetails {
 	@Id
 	private String id;
 
-	private String password;
+	@JsonIgnore
 	private String username;	
 
+	@JsonIgnore
+	private String password;
+
+	@JsonIgnore
     @ElementCollection(targetClass=GrantedAuthority.class)
 	private Collection<GrantedAuthority> authorities;
 	

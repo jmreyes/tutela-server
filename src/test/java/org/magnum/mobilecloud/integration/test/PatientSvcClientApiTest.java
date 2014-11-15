@@ -1,23 +1,28 @@
 package org.magnum.mobilecloud.integration.test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.fail;
 
-import java.util.Collection;
+import java.util.ArrayList;
+import java.util.Date;
 
 import net.jmreyes.tutelaserver.api.PatientSvcApi;
 import net.jmreyes.tutelaserver.api.SecuredRestBuilder;
-import net.jmreyes.tutelaserver.api.VideoSvcApi;
+import net.jmreyes.tutelaserver.model.CheckIn;
+import net.jmreyes.tutelaserver.model.CheckIn.EmbeddedMedication;
+import net.jmreyes.tutelaserver.model.CheckIn.EmbeddedSymptom;
 import net.jmreyes.tutelaserver.model.Video;
 
-import org.apache.http.HttpStatus;
 import org.junit.Test;
 import org.magnum.mobilecloud.video.TestData;
 
 import retrofit.ErrorHandler;
-import retrofit.RestAdapter;
 import retrofit.RestAdapter.LogLevel;
 import retrofit.RetrofitError;
 import retrofit.client.ApacheClient;
+import retrofit.converter.GsonConverter;
+
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 /**
  * 
@@ -66,12 +71,18 @@ public class PatientSvcClientApiTest {
 	private final String TEST_PATIENT_PASSWORD = "test";
 	private final String TEST_DOCTOR_USERNAME = "test@b.com";
 	private final String TEST_DOCTOR_PASSWORD = "test";
+	
+	Gson gson = new GsonBuilder()
+	.setDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ")
+	.create();
 
 	private PatientSvcApi patientService = new SecuredRestBuilder()
 			.setClient(new ApacheClient(UnsafeHttpsClient.createUnsafeClient()))
 			.setEndpoint(TEST_URL)
 			.setLoginEndpoint(TEST_URL + TOKEN_PATH)
+			//.setLogLevel(LogLevel.FULL)
 			.setLogLevel(LogLevel.FULL)
+			.setConverter(new GsonConverter(gson))
 			.setUsername(TEST_PATIENT_USERNAME)
 			.setPassword(TEST_PATIENT_PASSWORD).setClientId(CLIENT_ID).build()
 			.create(PatientSvcApi.class);
@@ -86,7 +97,7 @@ public class PatientSvcClientApiTest {
 	 * @throws Exception
 	 */
 	@Test
-	public void testGetTreatments() throws Exception {
+	public void testGetTreatments() {
 		//ErrorRecorder error = new ErrorRecorder();
 
 		try {
@@ -105,6 +116,66 @@ public class PatientSvcClientApiTest {
 		}
 	}
 
+	@Test
+	public void testGetTreatment() {
+		try {
+			patientService.getTreatment("54653499c83b132b351522b6");
+		} catch (Exception e) {
+			fail("testGetTreatment");
+		}
+	}
 	
+	@Test
+	public void testGetPatientDetails() {
+		try {
+			patientService.getPatientDetails();
+		} catch (Exception e) {
+			fail("testGetPatientDetails");
+		}
+	}
+	
+	@Test
+	public void testGetDoctor() {
+		try {
+			patientService.getDoctor("54674224c8e1368bc081d230");
+		} catch (Exception e) {
+			fail("testGetDoctor");
+		}
+	}
+	
+	@Test
+	public void testGetCheckInProposals() {
+		try {
+			patientService.getCheckInProposal();
+		} catch (Exception e) {
+			fail("testGetCheckInProposals");
+		}
+	}
+	
+	@Test
+	public void testPostCheckIn() {
 
+		ArrayList<EmbeddedMedication> ems = new ArrayList<EmbeddedMedication>();		
+		EmbeddedMedication em = new EmbeddedMedication("test", "test", true);
+		ems.add(em);
+		
+		ArrayList<EmbeddedSymptom> ess = new ArrayList<EmbeddedSymptom>();
+		EmbeddedSymptom es = new EmbeddedSymptom("someId", "Toothache", "GOOD", 1);
+		ess.add(es);
+		ess.add(es);
+		
+		Date now = new Date();
+		
+		CheckIn c = new CheckIn("aTreatmentId", "aPatientId", now, ems, ess);		
+
+		ArrayList<CheckIn> checkInCollection = new ArrayList<CheckIn>();	
+		checkInCollection.add(c);
+		checkInCollection.add(c);
+		
+		try {
+			patientService.postCheckIn(checkInCollection);
+		} catch (Exception e) {
+			fail("testPostCheckIn");
+		}
+	}
 }
