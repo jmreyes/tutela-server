@@ -50,7 +50,7 @@ public class CheckInProposal {
 				if (s == null) continue;				
 				String question = s.getQuestion();
 				Collection<Answer> answers = s.getAnswers();
-				EmbeddedSymptomProposal esp = new EmbeddedSymptomProposal(es.getSymptomId(), es.getSypmtomName(), question, answers);
+				EmbeddedSymptomProposal esp = new EmbeddedSymptomProposal(es.getSymptomId(), es.getSymptomName(), question, answers);
 				esps.add(esp);
 			}
 			cp.setSymptoms(esps);		

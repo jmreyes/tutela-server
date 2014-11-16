@@ -150,10 +150,13 @@ public class PatientSvc {
 	
 	@RequestMapping(value = PatientSvcApi.PATIENT_CHECKIN, method = RequestMethod.POST)
 	public @ResponseBody void postCheckIn(@RequestBody Collection<CheckIn> checkIns) {
+		Patient patient = (Patient) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		
 		// TODO: validation
-		System.out.println("postCheckIn");
+		
 		for (CheckIn c : checkIns) {
-			checkInRepo.save(c);
+			if (patient.getId().equals(c.getPatientId()))
+				checkInRepo.save(c);
 		}
 	}
 }

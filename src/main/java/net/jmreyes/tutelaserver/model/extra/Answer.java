@@ -2,7 +2,16 @@ package net.jmreyes.tutelaserver.model.extra;
 
 public class Answer {
 	private String ansText;
-	private int ansIndex;		
+	private int ansIndex;
+	
+	public Answer(String ansText, int ansIndex) {
+		super();
+		this.ansText = ansText;
+		this.ansIndex = ansIndex;
+	}
+	
+	public Answer() {
+	}
 
 	public String getAnsText() {
 		return ansText;

@@ -11,4 +11,5 @@ public interface TreatmentRepository extends MongoRepository<Treatment, String> 
 
 	public Collection<Treatment> findByPatientId(String patientId);
 	public Treatment findByIdAndPatientId(String id, String patientId);
+	public Treatment findByIdAndDoctorId(String id, String doctorId);
 }

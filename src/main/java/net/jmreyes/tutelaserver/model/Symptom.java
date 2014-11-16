@@ -23,11 +23,11 @@ public class Symptom {
 	private String name;	
 	private String question;	
 	private Collection<Answer> answers;	
-	private Collection<EmbeddedAlerts> alerts;
+	private Collection<EmbeddedAlert> alerts;
 
 	public Symptom(String id, String doctorId, String name, String question,
 			Collection<Answer> answers,
-			Collection<EmbeddedAlerts> alerts) {
+			Collection<EmbeddedAlert> alerts) {
 		super();
 		this.id = id;
 		this.doctorId = doctorId;
@@ -81,19 +81,41 @@ public class Symptom {
 		this.answers = answers;
 	}
 
-	public Collection<EmbeddedAlerts> getAlerts() {
+	public Collection<EmbeddedAlert> getAlerts() {
 		return alerts;
 	}
 
-	public void setAlerts(Collection<EmbeddedAlerts> alerts) {
+	public void setAlerts(Collection<EmbeddedAlert> alerts) {
 		this.alerts = alerts;
 	}
 	
-	public class EmbeddedAlerts {
-		private String hours;
-		private int ansIndex;
+	public static class EmbeddedAlert {
+		private int hours;
+		private int ansIndex;		
 		
-		public EmbeddedAlerts(){			
+		public EmbeddedAlert(int hours, int ansIndex) {
+			super();
+			this.hours = hours;
+			this.ansIndex = ansIndex;
+		}
+
+		public EmbeddedAlert(){			
+		}
+
+		public int getHours() {
+			return hours;
+		}
+
+		public void setHours(int hours) {
+			this.hours = hours;
+		}
+
+		public int getAnsIndex() {
+			return ansIndex;
+		}
+
+		public void setAnsIndex(int ansIndex) {
+			this.ansIndex = ansIndex;
 		}
 	}
 }

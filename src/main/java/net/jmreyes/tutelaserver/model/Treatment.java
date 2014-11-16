@@ -1,5 +1,7 @@
 package net.jmreyes.tutelaserver.model;
 
+import java.util.Collection;
+
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -19,12 +21,12 @@ public class Treatment {
 	private String patientName;
 	private String doctorId;
 
-	private EmbeddedMedication medication[];
-	private EmbeddedSymptom symptoms[];
+	private Collection<EmbeddedMedication> medication;
+	private Collection<EmbeddedSymptom> symptoms;
 	
 	public Treatment(String id, String patientId, String patientName,
-			String doctorId, EmbeddedMedication[] medication,
-			EmbeddedSymptom[] symptoms) {
+			String doctorId, Collection<EmbeddedMedication> medication,
+			Collection<EmbeddedSymptom> symptoms) {
 		super();
 		this.id = id;
 		this.patientId = patientId;
@@ -61,24 +63,32 @@ public class Treatment {
 	public void setDoctorId(String doctorId) {
 		this.doctorId = doctorId;
 	}
-	public EmbeddedMedication[] getMedication() {
+	public Collection<EmbeddedMedication> getMedication() {
 		return medication;
 	}
-	public void setMedication(EmbeddedMedication[] medication) {
+	public void setMedication(Collection<EmbeddedMedication> medication) {
 		this.medication = medication;
 	}
-	public EmbeddedSymptom[] getSymptoms() {
+	public Collection<EmbeddedSymptom> getSymptoms() {
 		return symptoms;
 	}
-	public void setSymptoms(EmbeddedSymptom[] symptoms) {
+	public void setSymptoms(Collection<EmbeddedSymptom> symptoms) {
 		this.symptoms = symptoms;
 	}
 
-	public class EmbeddedMedication {
+	public static class EmbeddedMedication {
 		private String medicationId;
 		private String medicationName;
 		private String notes;
 		
+		public EmbeddedMedication(String medicationId, String medicationName,
+				String notes) {
+			super();
+			this.medicationId = medicationId;
+			this.medicationName = medicationName;
+			this.notes = notes;
+		}
+
 		public EmbeddedMedication() {			
 		}
 		
@@ -102,10 +112,16 @@ public class Treatment {
 		}
 	}
 	
-	public class EmbeddedSymptom {
+	public static class EmbeddedSymptom {
 		private String symptomId;
-		private String sypmtomName;
+		private String symptomName;
 		
+		public EmbeddedSymptom(String symptomId, String symptomName) {
+			super();
+			this.symptomId = symptomId;
+			this.symptomName = symptomName;
+		}
+
 		public EmbeddedSymptom() {
 		}
 		
@@ -115,11 +131,14 @@ public class Treatment {
 		public void setSymptomId(String symptomId) {
 			this.symptomId = symptomId;
 		}
-		public String getSypmtomName() {
-			return sypmtomName;
+
+		public String getSymptomName() {
+			return symptomName;
 		}
-		public void setSypmtomName(String sypmtomName) {
-			this.sypmtomName = sypmtomName;
+
+		public void setSymptomName(String symptomName) {
+			this.symptomName = symptomName;
 		}
+		
 	}
 }

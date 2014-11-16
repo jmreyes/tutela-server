@@ -69,8 +69,6 @@ public class PatientSvcClientApiTest {
 
 	private final String TEST_PATIENT_USERNAME = "test@a.com";
 	private final String TEST_PATIENT_PASSWORD = "test";
-	private final String TEST_DOCTOR_USERNAME = "test@b.com";
-	private final String TEST_DOCTOR_PASSWORD = "test";
 	
 	Gson gson = new GsonBuilder()
 	.setDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ")
@@ -86,8 +84,6 @@ public class PatientSvcClientApiTest {
 			.setUsername(TEST_PATIENT_USERNAME)
 			.setPassword(TEST_PATIENT_PASSWORD).setClientId(CLIENT_ID).build()
 			.create(PatientSvcApi.class);
-
-	private Video video = TestData.randomVideo();
 
 	/**
 	 * This test creates a Video and attempts to add it to the video service

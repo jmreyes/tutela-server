@@ -25,10 +25,11 @@ public class PatientDetails {
 	private String lastName;
 	private String dateOfBirth;
 	
-	public PatientDetails(String patientId, String doctorId,
+	public PatientDetails(String id, String patientId, String doctorId,
 			String doctorName, String treatmentId, String mrn,
 			String firstName, String lastName, String dateOfBirth) {
 		super();
+		this.id = id;
 		this.patientId = patientId;
 		this.doctorId = doctorId;
 		this.doctorName = doctorName;

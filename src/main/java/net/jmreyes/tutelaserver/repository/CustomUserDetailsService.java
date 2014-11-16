@@ -25,7 +25,6 @@ public class CustomUserDetailsService implements UserDetailsService {
 	@Override
 	public UserDetails loadUserByUsername(String username)
 			throws UsernameNotFoundException {
-		System.out.println("Looking for user "+username+" in CustomUserDetailsService");
 		
 		Patient u = patients.findByUsername(username);		
 		if (u != null) return u;

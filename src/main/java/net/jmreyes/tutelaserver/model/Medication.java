@@ -18,8 +18,9 @@ public class Medication {
 	private String doctorId;
 	private String name;
 
-	public Medication(String doctorId, String name) {
+	public Medication(String id, String doctorId, String name) {
 		super();
+		this.id = id;
 		this.doctorId = doctorId;
 		this.name = name;
 	}

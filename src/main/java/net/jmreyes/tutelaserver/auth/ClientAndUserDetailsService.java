@@ -67,7 +67,6 @@ public class ClientAndUserDetailsService implements UserDetailsService,
 			throws UsernameNotFoundException {
 		UserDetails user = null;
 		try{
-			System.out.println("Looking for user "+username);
 			user = users_.loadUserByUsername(username);
 		}catch(UsernameNotFoundException e){
 			user = clientDetailsWrapper_.loadUserByUsername(username);
