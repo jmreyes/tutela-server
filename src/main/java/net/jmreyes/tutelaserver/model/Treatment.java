@@ -20,18 +20,21 @@ public class Treatment {
 	private String patientId;
 	private String patientName;
 	private String doctorId;
+	private String doctorName;
 
 	private Collection<EmbeddedMedication> medication;
 	private Collection<EmbeddedSymptom> symptoms;
 	
 	public Treatment(String id, String patientId, String patientName,
-			String doctorId, Collection<EmbeddedMedication> medication,
+			String doctorId, String doctorName,
+			Collection<EmbeddedMedication> medication,
 			Collection<EmbeddedSymptom> symptoms) {
 		super();
 		this.id = id;
 		this.patientId = patientId;
 		this.patientName = patientName;
 		this.doctorId = doctorId;
+		this.doctorName = doctorName;
 		this.medication = medication;
 		this.symptoms = symptoms;
 	}
@@ -62,6 +65,12 @@ public class Treatment {
 	}
 	public void setDoctorId(String doctorId) {
 		this.doctorId = doctorId;
+	}
+	public String getDoctorName() {
+		return doctorName;
+	}
+	public void setDoctorName(String doctorName) {
+		this.doctorName = doctorName;
 	}
 	public Collection<EmbeddedMedication> getMedication() {
 		return medication;

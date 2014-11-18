@@ -129,7 +129,7 @@ public class CheckIn {
 	
 	public static class EmbeddedSymptom {
 		private String symptomId;
-		private String sypmtomName;
+		private String symptomName;
 		private String ansText;
 		private int ansIndex;
 		
@@ -140,7 +140,7 @@ public class CheckIn {
 				String ansText, int ansIndex) {
 			super();
 			this.symptomId = symptomId;
-			this.sypmtomName = sypmtomName;
+			this.symptomName = sypmtomName;
 			this.ansText = ansText;
 			this.ansIndex = ansIndex;
 		}
@@ -151,11 +151,11 @@ public class CheckIn {
 		public void setSymptomId(String symptomId) {
 			this.symptomId = symptomId;
 		}
-		public String getSypmtomName() {
-			return sypmtomName;
+		public String getSymptomName() {
+			return symptomName;
 		}
-		public void setSypmtomName(String sypmtomName) {
-			this.sypmtomName = sypmtomName;
+		public void setSymptomName(String symptomName) {
+			this.symptomName = symptomName;
 		}
 		public String getAnsText() {
 			return ansText;

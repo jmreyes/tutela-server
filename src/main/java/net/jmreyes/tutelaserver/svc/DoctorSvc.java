@@ -232,6 +232,7 @@ public class DoctorSvc {
 		Doctor doctor = (Doctor) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		
 		treatment.setDoctorId(doctor.getId());
+		treatment.setDoctorName(doctor.getFirstName() + " " + doctor.getLastName());
 		
 		PatientDetails pd = patientDetailsRepo.findByPatientIdAndDoctorId(treatment.getPatientId(), doctor.getId());		
 

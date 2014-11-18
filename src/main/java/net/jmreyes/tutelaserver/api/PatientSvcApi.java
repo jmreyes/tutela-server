@@ -4,8 +4,8 @@ import java.util.Collection;
 
 import net.jmreyes.tutelaserver.model.CheckIn;
 import net.jmreyes.tutelaserver.model.Doctor;
-import net.jmreyes.tutelaserver.model.Patient;
 import net.jmreyes.tutelaserver.model.PatientDetails;
+import net.jmreyes.tutelaserver.model.Treatment;
 import net.jmreyes.tutelaserver.model.extra.CheckInProposal;
 import retrofit.http.Body;
 import retrofit.http.GET;
@@ -31,10 +31,10 @@ public interface PatientSvcApi {
 	public static final String PATIENT_CHECKIN = PATIENT_SVC_PATH + "/me/checkin";
 	
 	@GET(PATIENT_TREATMENTS)
-	public Collection<Patient> getTreatments();
+	public Collection<Treatment> getTreatments();
 	
 	@GET(PATIENT_TREATMENTS + "/{id}")
-	public Patient getTreatment(@Path("id") String id);
+	public Treatment getTreatment(@Path("id") String id);
 	
 	@GET(PATIENT_PATIENTDETAILS)
 	public Collection<PatientDetails> getPatientDetails();

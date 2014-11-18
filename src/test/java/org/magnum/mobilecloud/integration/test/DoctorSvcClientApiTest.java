@@ -249,7 +249,7 @@ public class DoctorSvcClientApiTest {
 			ArrayList<EmbeddedSymptom> ess = new ArrayList<EmbeddedSymptom>();
 			ess.add(es);
 			
-			Treatment t = new Treatment(null, "543da48171d2272d61e32153", "John Cobra", null, ems, ess);
+			Treatment t = new Treatment(null, "543da48171d2272d61e32153", "John Cobra", null, null, ems, ess);
 			
 			doctorService.postTreatment(t);
 		} catch (Exception e) {

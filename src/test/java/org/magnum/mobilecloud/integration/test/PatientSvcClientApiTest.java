@@ -115,8 +115,9 @@ public class PatientSvcClientApiTest {
 	@Test
 	public void testGetTreatment() {
 		try {
-			patientService.getTreatment("54653499c83b132b351522b6");
+			patientService.getTreatment("546a52e693f4c670f44d3538");
 		} catch (Exception e) {
+			e.printStackTrace();
 			fail("testGetTreatment");
 		}
 	}
@@ -133,7 +134,7 @@ public class PatientSvcClientApiTest {
 	@Test
 	public void testGetDoctor() {
 		try {
-			patientService.getDoctor("54674224c8e1368bc081d230");
+			patientService.getDoctor("543da48171d2272d61e32159");
 		} catch (Exception e) {
 			fail("testGetDoctor");
 		}
@@ -171,6 +172,7 @@ public class PatientSvcClientApiTest {
 		try {
 			patientService.postCheckIn(checkInCollection);
 		} catch (Exception e) {
+			e.printStackTrace();
 			fail("testPostCheckIn");
 		}
 	}
