@@ -21,6 +21,7 @@ package net.jmreyes.tutelaserver.svc;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
 import java.util.HashMap;
 
 import javax.servlet.http.HttpServletResponse;
@@ -160,8 +161,9 @@ public class PatientSvc {
 		// TODO: validation
 		
 		for (CheckIn c : checkIns) {
-			if (patient.getId().equals(c.getPatientId()))
-				checkInRepo.save(c);
+			c.setPatientId(c.getPatientId());
+			c.setDate(new Date());
+			checkInRepo.save(c);
 		}
 	}
 }
