@@ -123,16 +123,16 @@ public class CheckInProposal {
 	
 	public static class EmbeddedSymptomProposal {
 		private String symptomId;
-		private String sypmtomName;
+		private String symptomName;
 		private String question;
 		private Collection<Answer> answers;
 		
-		public EmbeddedSymptomProposal(String symptomId, String sypmtomName,
+		public EmbeddedSymptomProposal(String symptomId, String symptomName,
 				String question,
 				Collection<Answer> answers) {
 			super();
 			this.symptomId = symptomId;
-			this.sypmtomName = sypmtomName;
+			this.symptomName = symptomName;
 			this.question = question;
 			this.answers = answers;
 		}
@@ -143,11 +143,11 @@ public class CheckInProposal {
 		public void setSymptomId(String symptomId) {
 			this.symptomId = symptomId;
 		}
-		public String getSypmtomName() {
-			return sypmtomName;
+		public String getSymptomName() {
+			return symptomName;
 		}
-		public void setSypmtomName(String sypmtomName) {
-			this.sypmtomName = sypmtomName;
+		public void setSymptomName(String symptomName) {
+			this.symptomName = symptomName;
 		}
 		public String getQuestion() {
 			return question;

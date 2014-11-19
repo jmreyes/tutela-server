@@ -34,6 +34,7 @@ import net.jmreyes.tutelaserver.model.Symptom;
 import net.jmreyes.tutelaserver.model.Treatment;
 import net.jmreyes.tutelaserver.model.Treatment.EmbeddedSymptom;
 import net.jmreyes.tutelaserver.model.extra.CheckInProposal;
+import net.jmreyes.tutelaserver.model.extra.MyMedication;
 import net.jmreyes.tutelaserver.repository.CheckInRepository;
 import net.jmreyes.tutelaserver.repository.DoctorRepository;
 import net.jmreyes.tutelaserver.repository.PatientDetailsRepository;
@@ -70,17 +71,21 @@ public class PatientSvc {
 	private CheckInRepository checkInRepo;
 	
 	
-	@RequestMapping(value = PatientSvcApi.PATIENT_TREATMENTS, method = RequestMethod.GET)
-	public @ResponseBody Collection<Treatment> getTreatmentList() {
-		Patient patient = (Patient) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		return Lists.newArrayList(treatmentRepo.findByPatientId(patient.getId()));
-	}
-	
-	@RequestMapping(value = PatientSvcApi.PATIENT_TREATMENTS + "/{id}", method = RequestMethod.GET)
-	public @ResponseBody Treatment getTreatment(@PathVariable("id") String id, HttpServletResponse response) {		
+	@RequestMapping(value = PatientSvcApi.PATIENT_MEDICATION, method = RequestMethod.GET)
+	public @ResponseBody Collection<MyMedication> getMyMedicationList() {
 		Patient patient = (Patient) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		
-		Treatment treatment = treatmentRepo.findByIdAndPatientId(id, patient.getId());
+		Collection<Treatment> treatmentList = treatmentRepo.findByPatientId(patient.getId());
+		
+		return MyMedication.createListFromTreatments(treatmentList);
+	}
+	
+	@RequestMapping(value = PatientSvcApi.PATIENT_MEDICATION + "/{treatmentId}/{medicationId}", method = RequestMethod.GET)
+	public @ResponseBody MyMedication getOneMedication(@PathVariable("treatmentId") String treatmentId,
+			@PathVariable("medicationId") String medicationId, HttpServletResponse response) {		
+		Patient patient = (Patient) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		
+		Treatment treatment = treatmentRepo.findByIdAndPatientId(treatmentId, patient.getId());
 
 		if (treatment == null) {
 			try {
@@ -91,7 +96,7 @@ public class PatientSvc {
 			}	
 		}
 		
-		return treatment;
+		return MyMedication.createFromTreatment(treatment, medicationId);
 	}
 	
 	@RequestMapping(value = PatientSvcApi.PATIENT_PATIENTDETAILS, method = RequestMethod.GET)

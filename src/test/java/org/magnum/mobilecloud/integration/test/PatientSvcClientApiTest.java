@@ -93,12 +93,12 @@ public class PatientSvcClientApiTest {
 	 * @throws Exception
 	 */
 	@Test
-	public void testGetTreatments() {
+	public void testGetMyMedication() {
 		//ErrorRecorder error = new ErrorRecorder();
 
 		try {
 			// This should fail because we haven't logged in!
-			patientService.getTreatments();
+			patientService.getMyMedication();
 
 
 		} catch (Exception e) {
@@ -113,12 +113,12 @@ public class PatientSvcClientApiTest {
 	}
 
 	@Test
-	public void testGetTreatment() {
+	public void testGetOneMedication() {
 		try {
-			patientService.getTreatment("546a52e693f4c670f44d3538");
+			patientService.getOneMedication("546a52e693f4c670f44d3538", "aMedicationId");
 		} catch (Exception e) {
 			e.printStackTrace();
-			fail("testGetTreatment");
+			fail("testGetOneMedication");
 		}
 	}
 	
