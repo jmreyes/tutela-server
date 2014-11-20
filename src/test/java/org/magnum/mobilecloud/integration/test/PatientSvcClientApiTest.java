@@ -153,7 +153,7 @@ public class PatientSvcClientApiTest {
 	public void testPostCheckIn() {
 
 		ArrayList<EmbeddedMedication> ems = new ArrayList<EmbeddedMedication>();		
-		EmbeddedMedication em = new EmbeddedMedication("test", "test", true);
+		EmbeddedMedication em = new EmbeddedMedication("test", "test", true, new Date());
 		ems.add(em);
 		
 		ArrayList<EmbeddedSymptom> ess = new ArrayList<EmbeddedSymptom>();

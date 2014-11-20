@@ -95,16 +95,18 @@ public class CheckIn {
 		private String medicationId;
 		private String medicationName;
 		private boolean taken;
+		private Date date;
 		
 		public EmbeddedMedication() {			
 		}
 		
 		public EmbeddedMedication(String medicationId, String medicationName,
-				boolean taken) {
+				boolean taken, Date date) {
 			super();
 			this.medicationId = medicationId;
 			this.medicationName = medicationName;
 			this.taken = taken;
+			this.date = date;
 		}
 		
 		public String getMedicationId() {
@@ -124,6 +126,12 @@ public class CheckIn {
 		}
 		public void setTaken(boolean taken) {
 			this.taken = taken;
+		}
+		public Date getDate() {
+			return date;
+		}
+		public void setDate(Date date) {
+			this.date = date;
 		}
 	}
 	
