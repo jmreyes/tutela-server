@@ -35,6 +35,7 @@ import net.jmreyes.tutelaserver.model.Symptom;
 import net.jmreyes.tutelaserver.model.Treatment;
 import net.jmreyes.tutelaserver.model.Treatment.EmbeddedSymptom;
 import net.jmreyes.tutelaserver.model.extra.CheckInProposal;
+import net.jmreyes.tutelaserver.model.extra.MyDoctor;
 import net.jmreyes.tutelaserver.model.extra.MyMedication;
 import net.jmreyes.tutelaserver.repository.CheckInRepository;
 import net.jmreyes.tutelaserver.repository.DoctorRepository;
@@ -100,10 +101,13 @@ public class PatientSvc {
 		return MyMedication.createFromTreatment(treatment, medicationId);
 	}
 	
-	@RequestMapping(value = PatientSvcApi.PATIENT_PATIENTDETAILS, method = RequestMethod.GET)
-	public @ResponseBody Collection<PatientDetails> getPatientDetails() {
+	@RequestMapping(value = PatientSvcApi.PATIENT_DOCTORS, method = RequestMethod.GET)
+	public @ResponseBody Collection<MyDoctor> getDoctors() {
 		Patient patient = (Patient) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		return Lists.newArrayList(patientDetailsRepo.findByPatientId(patient.getId()));		
+		
+		Collection<PatientDetails> patientDetails = patientDetailsRepo.findByPatientId(patient.getId());
+		
+		return MyDoctor.createListFromPatientDetails(patientDetails);
 	}
 	
 	@RequestMapping(value = PatientSvcApi.PATIENT_DOCTORS + "/{id}", method = RequestMethod.GET)
@@ -165,5 +169,7 @@ public class PatientSvc {
 			c.setDate(new Date());
 			checkInRepo.save(c);
 		}
+		
+		// Check if Alerts must be created
 	}
 }

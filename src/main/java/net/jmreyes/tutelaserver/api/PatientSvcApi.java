@@ -7,6 +7,7 @@ import net.jmreyes.tutelaserver.model.Doctor;
 import net.jmreyes.tutelaserver.model.PatientDetails;
 import net.jmreyes.tutelaserver.model.Treatment;
 import net.jmreyes.tutelaserver.model.extra.CheckInProposal;
+import net.jmreyes.tutelaserver.model.extra.MyDoctor;
 import net.jmreyes.tutelaserver.model.extra.MyMedication;
 import retrofit.http.Body;
 import retrofit.http.GET;
@@ -37,8 +38,8 @@ public interface PatientSvcApi {
 	@GET(PATIENT_MEDICATION + "/{treatmentId}/{medicationId}")
 	public MyMedication getOneMedication(@Path("treatmentId") String treatmentId, @Path("medicationId") String medicationId);
 	
-	@GET(PATIENT_PATIENTDETAILS)
-	public Collection<PatientDetails> getPatientDetails();
+	@GET(PATIENT_DOCTORS)
+	public Collection<MyDoctor> getDoctors();
 	
 	@GET(PATIENT_DOCTORS + "/{id}")
 	public Doctor getDoctor(@Path("id") String id);

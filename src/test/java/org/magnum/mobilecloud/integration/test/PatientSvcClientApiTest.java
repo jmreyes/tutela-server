@@ -123,9 +123,9 @@ public class PatientSvcClientApiTest {
 	}
 	
 	@Test
-	public void testGetPatientDetails() {
+	public void testGetDoctors() {
 		try {
-			patientService.getPatientDetails();
+			patientService.getDoctors();
 		} catch (Exception e) {
 			fail("testGetPatientDetails");
 		}
