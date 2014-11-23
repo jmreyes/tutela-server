@@ -27,6 +27,7 @@ import java.util.HashMap;
 import javax.servlet.http.HttpServletResponse;
 
 import net.jmreyes.tutelaserver.api.PatientSvcApi;
+import net.jmreyes.tutelaserver.model.Alert;
 import net.jmreyes.tutelaserver.model.CheckIn;
 import net.jmreyes.tutelaserver.model.Doctor;
 import net.jmreyes.tutelaserver.model.Patient;
@@ -34,9 +35,11 @@ import net.jmreyes.tutelaserver.model.PatientDetails;
 import net.jmreyes.tutelaserver.model.Symptom;
 import net.jmreyes.tutelaserver.model.Treatment;
 import net.jmreyes.tutelaserver.model.Treatment.EmbeddedSymptom;
+import net.jmreyes.tutelaserver.model.extra.Answer;
 import net.jmreyes.tutelaserver.model.extra.CheckInProposal;
 import net.jmreyes.tutelaserver.model.extra.MyDoctor;
 import net.jmreyes.tutelaserver.model.extra.MyMedication;
+import net.jmreyes.tutelaserver.repository.AlertRepository;
 import net.jmreyes.tutelaserver.repository.CheckInRepository;
 import net.jmreyes.tutelaserver.repository.DoctorRepository;
 import net.jmreyes.tutelaserver.repository.PatientDetailsRepository;
@@ -71,6 +74,9 @@ public class PatientSvc {
 	
 	@Autowired
 	private CheckInRepository checkInRepo;
+	
+	@Autowired
+	private AlertRepository alertRepo;
 	
 	
 	@RequestMapping(value = PatientSvcApi.PATIENT_MEDICATION, method = RequestMethod.GET)
@@ -168,8 +174,57 @@ public class PatientSvc {
 			c.setPatientId(c.getPatientId());
 			c.setDate(new Date());
 			checkInRepo.save(c);
+			
+			createAlertIfNeeded(c);
 		}
+	}
+	
+
+	
+	private void createAlertIfNeeded(CheckIn checkIn) {
+		Collection<CheckIn> checkInsForTreatment = checkInRepo.findByTreatmentId(checkIn.getTreatmentId());
 		
-		// Check if Alerts must be created
+		for (CheckIn.EmbeddedSymptom es : checkIn.getSymptoms()) {
+			Symptom s = symptomRepo.findById(es.getSymptomId());
+			
+			if (s == null) continue;
+			
+			Collection<Symptom.EmbeddedAlert> eas = s.getAlerts();			
+			
+			for (Symptom.EmbeddedAlert ea : eas) {
+				int ansIndex = ea.getAnsIndex();
+				int timeMs = ea.getHours() * 60*60*1000;
+				long initialTime = checkIn.getDate().getTime();
+				boolean sendAlert = false;
+				
+				checkInLoop:
+				for (CheckIn c : checkInsForTreatment) {
+					for (CheckIn.EmbeddedSymptom es2 : c.getSymptoms()) {
+						if (es2.getSymptomId().equals(es.getSymptomId())) {
+							if (es2.getAnsIndex() < ansIndex) {
+								break checkInLoop;
+							} else if (initialTime - c.getDate().getTime() > timeMs) {
+								sendAlert = true;
+								break checkInLoop;
+							}
+						}
+					}
+				}
+				
+				if (sendAlert) {
+					PatientDetails pd = patientDetailsRepo.findByPatientIdAndDoctorId(checkIn.getPatientId(), s.getDoctorId());
+					Collection<Answer> answers = s.getAnswers();
+					String ansText = null;
+					for (Answer a : answers) {
+						if (a.getAnsIndex() == ansIndex) {
+							ansText = a.getAnsText();
+						}
+					}
+					Alert alert = new Alert(null, s.getDoctorId(), checkIn.getPatientId(), pd.getFirstName() + " " + pd.getLastName(),
+							checkIn.getTreatmentId(), false, ea.getHours(), ansText, new Date());
+					alertRepo.save(alert);
+				}
+			}
+		}		
 	}
 }

@@ -9,6 +9,7 @@ import org.springframework.data.mongodb.repository.MongoRepository;
 
 public interface SymptomRepository extends MongoRepository<Symptom, String> {
 	
+	public Symptom findById(String id);	
 	public Collection<Symptom> findByDoctorId(String doctorId);
 	public Symptom findByIdAndDoctorId(String id, String doctorId);
 	public Collection<Symptom> findByIdIn(Collection<String> ids);
