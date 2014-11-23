@@ -221,7 +221,7 @@ public class PatientSvc {
 						}
 					}
 					Alert alert = new Alert(null, s.getDoctorId(), checkIn.getPatientId(), pd.getFirstName() + " " + pd.getLastName(),
-							checkIn.getTreatmentId(), false, ea.getHours(), ansText, new Date());
+							checkIn.getTreatmentId(), false, s.getName(), ea.getHours(), ansText, new Date());
 					alertRepo.save(alert);
 				}
 			}

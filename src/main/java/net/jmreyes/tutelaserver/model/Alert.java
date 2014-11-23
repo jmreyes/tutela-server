@@ -23,13 +23,14 @@ public class Alert {
 	private String patientName;
 	private String treatmentId;
 	private boolean seen;
+	private String symptomName;
 	private int hours;
 	private String ansText;
 	private Date date;
 	
 	public Alert(String id, String doctorId, String patientId,
-			String patientName, String treatmentId, boolean seen, int hours,
-			String ansText, Date date) {
+			String patientName, String treatmentId, boolean seen, String symptomName,
+			int hours, String ansText, Date date) {
 		super();
 		this.id = id;
 		this.doctorId = doctorId;
@@ -37,6 +38,7 @@ public class Alert {
 		this.patientName = patientName;
 		this.treatmentId = treatmentId;
 		this.seen = seen;
+		this.symptomName = symptomName;
 		this.hours = hours;
 		this.ansText = ansText;
 		this.date = date;
@@ -80,6 +82,13 @@ public class Alert {
 	}
 	public void setSeen(boolean seen) {
 		this.seen = seen;
+	}
+	public String getSymptomName() {
+		return symptomName;
+	}
+
+	public void setSymptomName(String symptomName) {
+		this.symptomName = symptomName;
 	}
 	public int getHours() {
 		return hours;

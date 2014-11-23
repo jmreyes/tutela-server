@@ -7,13 +7,13 @@ import net.jmreyes.tutelaserver.model.Alert;
 public class DoctorStatus {
 	private String username;
 	private String name;
-	private Collection<Alert> alerts;	
+	private int unseenAlerts;	
 	
-	public DoctorStatus(String username, String name, Collection<Alert> alerts) {
+	public DoctorStatus(String username, String name, int unseenAlerts) {
 		super();
 		this.username = username;
 		this.name = name;
-		this.alerts = alerts;
+		this.unseenAlerts = unseenAlerts;
 	}
 	
 	public DoctorStatus() {
@@ -31,10 +31,11 @@ public class DoctorStatus {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public Collection<Alert> getAlerts() {
-		return alerts;
+	public int getUnseenAlerts() {
+		return unseenAlerts;
 	}
-	public void setAlerts(Collection<Alert> alerts) {
-		this.alerts = alerts;
+
+	public void setUnseenAlerts(int unseenAlerts) {
+		this.unseenAlerts = unseenAlerts;
 	}
 }

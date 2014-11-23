@@ -81,7 +81,7 @@ public class DoctorSvc {
 		String name = doctor.getFirstName() + " " + doctor.getLastName();
 		Collection<Alert> alerts = alertRepo.findByDoctorIdAndSeenFalse(doctor.getId());
 		
-		return new DoctorStatus(username, name, alerts);
+		return new DoctorStatus(username, name, alerts.size());
 	}
 	
 	@RequestMapping(value = DoctorSvcApi.DOCTOR_ALERTS, method = RequestMethod.GET)
