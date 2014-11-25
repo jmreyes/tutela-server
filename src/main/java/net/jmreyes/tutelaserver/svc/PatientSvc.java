@@ -171,7 +171,7 @@ public class PatientSvc {
 		// TODO: validation
 		
 		for (CheckIn c : checkIns) {
-			c.setPatientId(c.getPatientId());
+			c.setPatientId(patient.getId());
 			c.setDate(new Date());
 			checkInRepo.save(c);
 			

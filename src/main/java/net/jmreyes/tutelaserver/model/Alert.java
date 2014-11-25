@@ -6,6 +6,10 @@ import java.util.Date;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+
+import net.jmreyes.tutelaserver.api.CustomDateSerializer;
+
 /**
  * A simple object to represent a video and its URL for viewing.
  * 
@@ -26,6 +30,8 @@ public class Alert {
 	private String symptomName;
 	private int hours;
 	private String ansText;
+
+	@JsonSerialize(using = CustomDateSerializer.class)
 	private Date date;
 	
 	public Alert(String id, String doctorId, String patientId,
