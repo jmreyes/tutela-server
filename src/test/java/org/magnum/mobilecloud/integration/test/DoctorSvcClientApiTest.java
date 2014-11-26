@@ -147,7 +147,7 @@ public class DoctorSvcClientApiTest {
 			PatientDetails pd = new PatientDetails("54674178c8e1368bc081d22f",
 					"543da48171d2272d61e32153", "543da48171d2272d61e32159",
 					"John Malkovich", null, "asdas", "John", "Cobra",
-					"asomdas");
+					"asomdas", "patient@patient.com", "2345");
 			
 			doctorService.updatePatient("543da48171d2272d61e32153", pd);
 		} catch (Exception e) {

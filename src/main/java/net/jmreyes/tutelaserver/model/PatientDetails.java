@@ -24,10 +24,13 @@ public class PatientDetails {
 	private String firstName;
 	private String lastName;
 	private String dateOfBirth;
+	private String email;
+	private String phone;
 	
 	public PatientDetails(String id, String patientId, String doctorId,
 			String doctorName, String treatmentId, String mrn,
-			String firstName, String lastName, String dateOfBirth) {
+			String firstName, String lastName, String dateOfBirth, 
+			String email, String phone) {
 		super();
 		this.id = id;
 		this.patientId = patientId;
@@ -38,6 +41,8 @@ public class PatientDetails {
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.dateOfBirth = dateOfBirth;
+		this.email = email;
+		this.phone = phone;
 	}
 
 	public PatientDetails() {
@@ -114,4 +119,22 @@ public class PatientDetails {
 	public void setDateOfBirth(String dateOfBirth) {
 		this.dateOfBirth = dateOfBirth;
 	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getPhone() {
+		return phone;
+	}
+
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
+	
+	
 }

@@ -49,7 +49,7 @@ public interface DoctorSvcApi {
 	public Collection<PatientDetails> getPatients();
 	
 	@GET(DOCTOR_PATIENTS + "/{id}")
-	public Patient getPatient(@Path("id") String id);
+	public PatientDetails getPatient(@Path("id") String id);
 	
 	@PUT(DOCTOR_PATIENTS + "/{id}")
 	public Void updatePatient(@Path("id") String id, @Body PatientDetails patientDetails);
