@@ -25,6 +25,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import net.jmreyes.tutelaserver.api.DoctorSvcApi;
 import net.jmreyes.tutelaserver.model.Alert;
+import net.jmreyes.tutelaserver.model.CheckIn;
 import net.jmreyes.tutelaserver.model.Doctor;
 import net.jmreyes.tutelaserver.model.Medication;
 import net.jmreyes.tutelaserver.model.PatientDetails;
@@ -32,6 +33,7 @@ import net.jmreyes.tutelaserver.model.Symptom;
 import net.jmreyes.tutelaserver.model.Treatment;
 import net.jmreyes.tutelaserver.model.extra.DoctorStatus;
 import net.jmreyes.tutelaserver.repository.AlertRepository;
+import net.jmreyes.tutelaserver.repository.CheckInRepository;
 import net.jmreyes.tutelaserver.repository.MedicationRepository;
 import net.jmreyes.tutelaserver.repository.PatientDetailsRepository;
 import net.jmreyes.tutelaserver.repository.SymptomRepository;
@@ -70,6 +72,9 @@ public class DoctorSvc {
 	
 	@Autowired
 	private TreatmentRepository treatmentRepo;
+	
+	@Autowired
+	private CheckInRepository checkInRepo;
 		
 	@RequestMapping(value = DoctorSvcApi.DOCTOR_STATUS, method = RequestMethod.GET)
 	public @ResponseBody DoctorStatus getStatus() {
@@ -255,5 +260,34 @@ public class DoctorSvc {
 			pd.setTreatmentId(savedTreatment.getId());
 			patientDetailsRepo.save(pd);
 		}
+	}
+	
+	@RequestMapping(value = DoctorSvcApi.DOCTOR_TREATMENT + "/{id}" + "/checkins", method = RequestMethod.GET)
+	public @ResponseBody Collection<CheckIn> getCheckIns(@PathVariable("id") String id, HttpServletResponse response) {
+		Doctor doctor = (Doctor) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		
+		Treatment treatment = treatmentRepo.findByIdAndDoctorId(id, doctor.getId());
+		
+		if (treatment == null) {
+			try {
+				response.sendError(HttpServletResponse.SC_UNAUTHORIZED);
+				return null;
+			} catch (IOException e) {
+				e.printStackTrace();
+			}	
+		}
+		
+		Collection<CheckIn> result = checkInRepo.findByTreatmentId(id);
+		
+		if (result == null) {
+			try {
+				response.sendError(HttpServletResponse.SC_NOT_FOUND);
+				return null;
+			} catch (IOException e) {
+				e.printStackTrace();
+			}	
+		}
+		
+		return result;
 	}
 }

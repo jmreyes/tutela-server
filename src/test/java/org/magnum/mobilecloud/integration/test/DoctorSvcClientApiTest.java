@@ -257,4 +257,14 @@ public class DoctorSvcClientApiTest {
 			fail("testPostTreatment");
 		}
 	}
+	
+	@Test
+	public void testGetCheckIns() {
+		try {
+			doctorService.getCheckIns("5468199493f4336f67e26741");
+		} catch (Exception e) {
+			e.printStackTrace();
+			fail("testGetCheckIns");
+		}
+	}
 }

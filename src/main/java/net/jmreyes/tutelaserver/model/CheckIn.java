@@ -4,10 +4,14 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 
+import net.jmreyes.tutelaserver.api.CustomDateSerializer;
+
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.DateTimeFormat.ISO;
+
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 /**
  * A simple object to represent a video and its URL for viewing.
@@ -24,6 +28,7 @@ public class CheckIn {
 	private String treatmentId;
 	private String patientId;	
 
+	@JsonSerialize(using = CustomDateSerializer.class)
 	private Date date;
 
 	private Collection<EmbeddedMedication> medication;
@@ -95,6 +100,7 @@ public class CheckIn {
 		private String medicationId;
 		private String medicationName;
 		private boolean taken;
+		@JsonSerialize(using = CustomDateSerializer.class)
 		private Date date;
 		
 		public EmbeddedMedication() {			

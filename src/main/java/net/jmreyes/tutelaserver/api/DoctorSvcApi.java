@@ -77,4 +77,7 @@ public interface DoctorSvcApi {
 	
 	@POST(DOCTOR_TREATMENT)
 	public Void postTreatment(@Body Treatment medication);
+	
+	@GET(DOCTOR_TREATMENT + "/{id}" + "/checkins")
+	public Collection<Treatment> getCheckIns(@Path("id") String id);
 }
