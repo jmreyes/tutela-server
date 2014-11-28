@@ -48,6 +48,9 @@ public interface DoctorSvcApi {
 	@GET(DOCTOR_PATIENTS)
 	public Collection<PatientDetails> getPatients();
 	
+	@GET(DOCTOR_PATIENTS + "/search/{query}")
+	public Collection<PatientDetails> searchPatients(@Path("query") String query);
+	
 	@GET(DOCTOR_PATIENTS + "/{id}")
 	public PatientDetails getPatient(@Path("id") String id);
 	

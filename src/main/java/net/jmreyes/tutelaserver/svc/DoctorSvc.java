@@ -114,6 +114,12 @@ public class DoctorSvc {
 		return patientDetailsRepo.findByDoctorId(doctor.getId());
 	}
 	
+	@RequestMapping(value = DoctorSvcApi.DOCTOR_PATIENTS + "/search/{query}", method = RequestMethod.GET)
+	public @ResponseBody Collection<PatientDetails> searchPatients(@PathVariable("query") String query) {
+		Doctor doctor = (Doctor) SecurityContextHolder.getContext().getAuthentication().getPrincipal();		
+		return patientDetailsRepo.findByDoctorIdAndFirstNameStartingWithIgnoreCaseOrLastNameStartingWithIgnoreCase(doctor.getId(), query, query);
+	}
+	
 	@RequestMapping(value = DoctorSvcApi.DOCTOR_PATIENTS + "/{id}", method = RequestMethod.GET)
 	public @ResponseBody PatientDetails getPatient(@PathVariable("id") String id, HttpServletResponse response) {
 		Doctor doctor = (Doctor) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -247,7 +253,7 @@ public class DoctorSvc {
 				return;
 			} catch (IOException e) {
 				e.printStackTrace();
-			}	
+			}
 		}
 		
 		String treatmentIdInPd = pd.getTreatmentId();		

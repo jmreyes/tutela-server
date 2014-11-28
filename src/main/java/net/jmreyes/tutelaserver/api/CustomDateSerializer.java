@@ -18,6 +18,5 @@ public class CustomDateSerializer extends JsonSerializer<Date> {
         String formattedDate = formatter.format(value);
 
         gen.writeString(formattedDate);
-
     }
 }
