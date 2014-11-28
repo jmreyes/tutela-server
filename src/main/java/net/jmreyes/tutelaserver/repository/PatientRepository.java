@@ -3,7 +3,6 @@ package net.jmreyes.tutelaserver.repository;
 import java.util.Collection;
 
 import net.jmreyes.tutelaserver.api.PatientSvcApi;
-import net.jmreyes.tutelaserver.api.VideoSvcApi;
 import net.jmreyes.tutelaserver.model.Doctor;
 import net.jmreyes.tutelaserver.model.Patient;
 import net.jmreyes.tutelaserver.model.Video;
@@ -37,11 +36,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 public interface PatientRepository extends MongoRepository<Patient, String> {
 
 	// Find all videos with a matching title (e.g., Video.name)
-	public Patient findByUsername(
-			// The @Param annotation tells Spring Data Rest which HTTP request
-			// parameter it should use to fill in the "title" variable used to
-			// search for Videos
-			@Param(VideoSvcApi.TITLE_PARAMETER) String username);
+	public Patient findByUsername(String username);
 	
 	
 	/*

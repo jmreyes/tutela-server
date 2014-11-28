@@ -2,7 +2,6 @@ package net.jmreyes.tutelaserver.repository;
 
 import net.jmreyes.tutelaserver.model.Doctor;
 import net.jmreyes.tutelaserver.model.Patient;
-import net.jmreyes.tutelaserver.model.Video;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -11,10 +10,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 @Service
-public class CustomUserDetailsService implements UserDetailsService {
-	@Autowired
-	private VideoRepository videos;	
-	
+public class CustomUserDetailsService implements UserDetailsService {	
 	@Autowired
 	private PatientRepository patients;
 	

@@ -1,4 +1,4 @@
-package org.magnum.mobilecloud.integration.test;
+package net.jmreyes.tutelaserver.integration.test;
 
 import static org.junit.Assert.fail;
 
@@ -13,7 +13,6 @@ import net.jmreyes.tutelaserver.model.CheckIn.EmbeddedSymptom;
 import net.jmreyes.tutelaserver.model.Video;
 
 import org.junit.Test;
-import org.magnum.mobilecloud.video.TestData;
 
 import retrofit.ErrorHandler;
 import retrofit.RestAdapter.LogLevel;

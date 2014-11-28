@@ -1,4 +1,4 @@
-package org.magnum.mobilecloud.integration.test;
+package net.jmreyes.tutelaserver.integration.test;
 
 import org.apache.http.client.HttpClient;
 import org.apache.http.conn.ssl.SSLConnectionSocketFactory;

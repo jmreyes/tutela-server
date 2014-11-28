@@ -1,4 +1,4 @@
-package org.magnum.mobilecloud.integration.test;
+package net.jmreyes.tutelaserver.integration.test;
 
 import static org.junit.Assert.fail;
 
