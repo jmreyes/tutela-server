@@ -56,39 +56,51 @@ public class Alert {
 	public String getId() {
 		return id;
 	}
+	
 	public void setId(String id) {
 		this.id = id;
 	}
+	
 	public String getDoctorId() {
 		return doctorId;
 	}
+	
 	public void setDoctorId(String doctorId) {
 		this.doctorId = doctorId;
 	}
+	
 	public String getPatientId() {
 		return patientId;
 	}
+	
 	public void setPatientId(String patientId) {
 		this.patientId = patientId;
 	}
+	
 	public String getPatientName() {
 		return patientName;
 	}
+	
 	public void setPatientName(String patientName) {
 		this.patientName = patientName;
 	}
+	
 	public String getTreatmentId() {
 		return treatmentId;
 	}
+	
 	public void setTreatmentId(String treatmentId) {
 		this.treatmentId = treatmentId;
 	}
+	
 	public boolean isSeen() {
 		return seen;
 	}
+	
 	public void setSeen(boolean seen) {
 		this.seen = seen;
 	}
+	
 	public String getSymptomName() {
 		return symptomName;
 	}
@@ -96,23 +108,28 @@ public class Alert {
 	public void setSymptomName(String symptomName) {
 		this.symptomName = symptomName;
 	}
+	
 	public int getHours() {
 		return hours;
 	}
+	
 	public void setHours(int hours) {
 		this.hours = hours;
 	}
+	
 	public String getAnsText() {
 		return ansText;
 	}
+	
 	public void setAnsText(String ansText) {
 		this.ansText = ansText;
 	}
+	
 	public Date getDate() {
 		return date;
 	}
+	
 	public void setDate(Date date) {
 		this.date = date;
 	}
-
 }

@@ -110,12 +110,15 @@ public class CheckInProposal {
 		public String getMedicationId() {
 			return medicationId;
 		}
+		
 		public void setMedicationId(String medicationId) {
 			this.medicationId = medicationId;
 		}
+		
 		public String getMedicationName() {
 			return medicationName;
 		}
+		
 		public void setMedicationName(String medicationName) {
 			this.medicationName = medicationName;
 		}
@@ -140,15 +143,19 @@ public class CheckInProposal {
 		public String getSymptomId() {
 			return symptomId;
 		}
+		
 		public void setSymptomId(String symptomId) {
 			this.symptomId = symptomId;
 		}
+		
 		public String getSymptomName() {
 			return symptomName;
 		}
+		
 		public void setSymptomName(String symptomName) {
 			this.symptomName = symptomName;
 		}
+		
 		public String getQuestion() {
 			return question;
 		}

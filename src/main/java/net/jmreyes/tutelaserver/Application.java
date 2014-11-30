@@ -2,6 +2,7 @@ package net.jmreyes.tutelaserver;
 
 import net.jmreyes.tutelaserver.api.ResourcesMapper;
 import net.jmreyes.tutelaserver.auth.OAuth2SecurityConfiguration;
+
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.context.annotation.ComponentScan;

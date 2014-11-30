@@ -1,21 +1,3 @@
-/*
- * 
- * Copyright 2014 Jules White
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- * 
- *     http://www.apache.org/licenses/LICENSE-2.0
- * 
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- * 
- */
-
 package net.jmreyes.tutelaserver.svc;
 
 import java.io.IOException;
@@ -45,7 +27,6 @@ import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -79,8 +60,6 @@ public class DoctorSvc {
 	@RequestMapping(value = DoctorSvcApi.DOCTOR_STATUS, method = RequestMethod.GET)
 	public @ResponseBody DoctorStatus getStatus() {
 		Doctor doctor = (Doctor) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		
-		System.out.println(doctor.getId());
 
 		String username = doctor.getUsername();
 		String name = doctor.getFirstName() + " " + doctor.getLastName();
@@ -118,8 +97,6 @@ public class DoctorSvc {
 	public @ResponseBody Collection<PatientDetails> searchPatients(@PathVariable("query") String queryString) {
 		Doctor doctor = (Doctor) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		
-		System.out.println(queryString);		
-
 		Query query = new Query();
 		query.addCriteria(Criteria.where("doctorId").is(doctor.getId()));
 		query.addCriteria(new Criteria().orOperator(Criteria.where("firstName").regex("^"+queryString, "i"), 

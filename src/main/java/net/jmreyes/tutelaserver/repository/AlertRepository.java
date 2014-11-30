@@ -3,7 +3,6 @@ package net.jmreyes.tutelaserver.repository;
 import java.util.Collection;
 
 import net.jmreyes.tutelaserver.model.Alert;
-import net.jmreyes.tutelaserver.model.Symptom;
 
 import org.springframework.data.mongodb.repository.MongoRepository;
 

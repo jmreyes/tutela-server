@@ -4,7 +4,6 @@ import java.util.Collection;
 
 import net.jmreyes.tutelaserver.model.Alert;
 import net.jmreyes.tutelaserver.model.Medication;
-import net.jmreyes.tutelaserver.model.Patient;
 import net.jmreyes.tutelaserver.model.PatientDetails;
 import net.jmreyes.tutelaserver.model.Symptom;
 import net.jmreyes.tutelaserver.model.Treatment;
@@ -15,16 +14,6 @@ import retrofit.http.POST;
 import retrofit.http.PUT;
 import retrofit.http.Path;
 
-/**
- * This interface defines an API for a VideoSvc. The
- * interface is used to provide a contract for client/server
- * interactions. The interface is annotated with Retrofit
- * annotations so that clients can automatically convert the
- * 
- * 
- * @author jules
- *
- */
 public interface DoctorSvcApi {
 	public static final String DOCTOR_SVC_PATH = "/doctor";	
 

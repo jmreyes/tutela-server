@@ -118,24 +118,31 @@ public class CheckIn {
 		public String getMedicationId() {
 			return medicationId;
 		}
+		
 		public void setMedicationId(String medicationId) {
 			this.medicationId = medicationId;
 		}
+		
 		public String getMedicationName() {
 			return medicationName;
 		}
+		
 		public void setMedicationName(String medicationName) {
 			this.medicationName = medicationName;
 		}
+		
 		public boolean getTaken() {
 			return taken;
 		}
+		
 		public void setTaken(boolean taken) {
 			this.taken = taken;
 		}
+		
 		public Date getDate() {
 			return date;
 		}
+		
 		public void setDate(Date date) {
 			this.date = date;
 		}
@@ -162,28 +169,33 @@ public class CheckIn {
 		public String getSymptomId() {
 			return symptomId;
 		}
+		
 		public void setSymptomId(String symptomId) {
 			this.symptomId = symptomId;
 		}
+		
 		public String getSymptomName() {
 			return symptomName;
 		}
+		
 		public void setSymptomName(String symptomName) {
 			this.symptomName = symptomName;
 		}
+		
 		public String getAnsText() {
 			return ansText;
 		}
+		
 		public void setAnsText(String ansText) {
 			this.ansText = ansText;
 		}
+		
 		public int getAnsIndex() {
 			return ansIndex;
 		}
+		
 		public void setAnsIndex(int ansIndex) {
 			this.ansIndex = ansIndex;
 		}
 	}
-
-
 }

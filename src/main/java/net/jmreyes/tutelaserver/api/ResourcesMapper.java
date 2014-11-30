@@ -1,8 +1,6 @@
 package net.jmreyes.tutelaserver.api;
 
 import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 import org.springframework.hateoas.Resources;
 
