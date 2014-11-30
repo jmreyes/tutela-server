@@ -1,5 +1,7 @@
 package net.jmreyes.tutelaserver.auth;
 
+import java.io.File;
+
 import net.jmreyes.tutelaserver.api.DoctorSvcApi;
 import net.jmreyes.tutelaserver.api.PatientSvcApi;
 
@@ -251,8 +253,8 @@ public class OAuth2SecurityConfiguration {
 		// application, this is one of the key sections that you
 		// would want to change
 
-//		final String absoluteKeystoreFile = new File(keystoreFile)
-//				.getAbsolutePath();
+		final String absoluteKeystoreFile = new File(keystoreFile)
+				.getAbsolutePath();
 
 		return new EmbeddedServletContainerCustomizer() {
 
@@ -264,17 +266,15 @@ public class OAuth2SecurityConfiguration {
 					public void customize(Connector connector) {
 						connector.setPort(8443);
 						
-						// TODO: enable HTTPS/SSL for production
-						
-//						connector.setSecure(true);
-//						connector.setScheme("https");
+						connector.setSecure(true);
+						connector.setScheme("https");
 
 						Http11NioProtocol proto = (Http11NioProtocol) connector
 								.getProtocolHandler();
-//						proto.setSSLEnabled(true);
-//						proto.setKeystoreFile(absoluteKeystoreFile);
-//						proto.setKeystorePass(keystorePass);
-//						proto.setKeystoreType("JKS");
+						proto.setSSLEnabled(true);
+						proto.setKeystoreFile(absoluteKeystoreFile);
+						proto.setKeystorePass(keystorePass);
+						proto.setKeystoreType("JKS");
 						proto.setKeyAlias("tomcat");
 					}
 				});
@@ -282,5 +282,4 @@ public class OAuth2SecurityConfiguration {
 			}
 		};
 	}
-
 }
