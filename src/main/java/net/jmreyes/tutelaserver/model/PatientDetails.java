@@ -25,12 +25,12 @@ public class PatientDetails {
 	private String lastName;
 	private String dateOfBirth;
 	private String email;
-	private String phone;
+	private String phoneNumber;
 	
 	public PatientDetails(String id, String patientId, String doctorId,
 			String doctorName, String treatmentId, String mrn,
 			String firstName, String lastName, String dateOfBirth, 
-			String email, String phone) {
+			String email, String phoneNumber) {
 		super();
 		this.id = id;
 		this.patientId = patientId;
@@ -42,7 +42,7 @@ public class PatientDetails {
 		this.lastName = lastName;
 		this.dateOfBirth = dateOfBirth;
 		this.email = email;
-		this.phone = phone;
+		this.phoneNumber = phoneNumber;
 	}
 
 	public PatientDetails() {
@@ -128,12 +128,12 @@ public class PatientDetails {
 		this.email = email;
 	}
 
-	public String getPhone() {
-		return phone;
+	public String getPhoneNumber() {
+		return phoneNumber;
 	}
 
-	public void setPhone(String phone) {
-		this.phone = phone;
+	public void setPhoneNumber(String phoneNumber) {
+		this.phoneNumber = phoneNumber;
 	}
 	
 	

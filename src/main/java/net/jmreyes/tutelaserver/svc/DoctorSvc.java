@@ -115,9 +115,17 @@ public class DoctorSvc {
 	}
 	
 	@RequestMapping(value = DoctorSvcApi.DOCTOR_PATIENTS + "/search/{query}", method = RequestMethod.GET)
-	public @ResponseBody Collection<PatientDetails> searchPatients(@PathVariable("query") String query) {
-		Doctor doctor = (Doctor) SecurityContextHolder.getContext().getAuthentication().getPrincipal();		
-		return patientDetailsRepo.findByDoctorIdAndFirstNameStartingWithIgnoreCaseOrLastNameStartingWithIgnoreCase(doctor.getId(), query, query);
+	public @ResponseBody Collection<PatientDetails> searchPatients(@PathVariable("query") String queryString) {
+		Doctor doctor = (Doctor) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		
+		System.out.println(queryString);		
+
+		Query query = new Query();
+		query.addCriteria(Criteria.where("doctorId").is(doctor.getId()));
+		query.addCriteria(new Criteria().orOperator(Criteria.where("firstName").regex("^"+queryString, "i"), 
+				Criteria.where("lastName").regex("^"+queryString, "i")));
+
+		return mongoOperations.find(query, PatientDetails.class);
 	}
 	
 	@RequestMapping(value = DoctorSvcApi.DOCTOR_PATIENTS + "/{id}", method = RequestMethod.GET)

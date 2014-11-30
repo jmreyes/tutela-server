@@ -11,6 +11,4 @@ public interface PatientDetailsRepository extends MongoRepository<PatientDetails
 	public Collection<PatientDetails> findByPatientId(String patientId);
 	public Collection<PatientDetails> findByDoctorId(String doctorId);
 	public PatientDetails findByPatientIdAndDoctorId(String patientId, String doctorId);
-	public Collection<PatientDetails> findByDoctorIdAndFirstNameStartingWithIgnoreCaseOrLastNameStartingWithIgnoreCase(String doctorId, String query1, String query2);
-	
 }
